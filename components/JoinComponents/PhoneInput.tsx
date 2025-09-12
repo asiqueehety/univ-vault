@@ -1,4 +1,9 @@
-export default function PhoneInput(){
+interface PhoneInputProps {
+  val: string;
+  onchange: (value: string) => void;
+}
+
+export default function PhoneInput(props: PhoneInputProps) {
     return(
         <div>
             <label className="input validator">
@@ -25,6 +30,8 @@ export default function PhoneInput(){
                     minLength={10}
                     maxLength={10}
                     title="Must be 10 digits"
+                    value={props.val}
+                    onChange={(e) => props.onchange(e.target.value)}
                 />
             </label>
             <p className="validator-hint">Must be 10 digits</p>

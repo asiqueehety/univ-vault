@@ -15,8 +15,8 @@ const PageTransitionWrapper: React.FC<PageTransitionWrapperProps> = ({ children 
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={pathname}
-        initial={{ opacity: 0, x: -200 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1}}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
         {children}

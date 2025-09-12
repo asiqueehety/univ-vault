@@ -1,4 +1,11 @@
-export default function PasswordInput() {
+interface PasswordInputProps {
+  val: string;
+  onchange: (value: string) => void;
+}
+
+export default function PasswordInput(props  : PasswordInputProps) {
+    const val = props.val;
+    const onchange = props.onchange;
     return(
         <div>
             <label className="input validator">
@@ -21,6 +28,8 @@ export default function PasswordInput() {
                     required
                     placeholder="Password"
                     minLength={8}
+                    value={val}
+                    onChange={(e) => onchange(e.target.value)}
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 />
                 </label>

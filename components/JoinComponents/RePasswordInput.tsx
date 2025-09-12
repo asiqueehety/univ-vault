@@ -1,4 +1,9 @@
-export default function RePasswordInput() {
+interface RePasswordInputProps {
+  val: string;
+  onchange: (value: string) => void;
+}
+
+export default function RePasswordInput(props: RePasswordInputProps) {
     return(
         <div>
             <label className="input validator">
@@ -21,6 +26,8 @@ export default function RePasswordInput() {
                     required
                     placeholder="Retype Password"
                     minLength={8}
+                    value={props.val}
+                    onChange={(e) => props.onchange(e.target.value)}
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 />
                 </label>

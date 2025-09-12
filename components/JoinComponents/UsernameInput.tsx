@@ -1,4 +1,11 @@
-export default function UsernameInput() {
+interface UsernameInputProps {
+  val: string;
+  onchange: (value: string) => void;
+}
+export default function UsernameInput(props: UsernameInputProps) {
+    const val = props.val;
+    const onchange = props.onchange;
+
     return(
         <div>
             <label className="input validator">
@@ -18,6 +25,8 @@ export default function UsernameInput() {
                 type="text"
                 required
                 placeholder="Username"
+                value={val}
+                onChange={(e) => onchange(e.target.value)}
                 pattern="[A-Za-z][A-Za-z0-9\-]*"
                 minLength={3}
                 maxLength={30}
