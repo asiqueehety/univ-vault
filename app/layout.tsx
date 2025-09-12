@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
+import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 
 export const metadata: Metadata = {
   title: "UnivVault",
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NavBar />
-        {children}
+        <PageTransitionWrapper>
+          {children}
+        </PageTransitionWrapper>
       </body>
     </html>
   );
