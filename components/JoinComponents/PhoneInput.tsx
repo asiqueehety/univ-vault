@@ -27,14 +27,14 @@ export default function PhoneInput(props: PhoneInputProps) {
                     required
                     placeholder="Phone"
                     pattern="[0-9]*"
-                    minLength={10}
-                    maxLength={10}
-                    title="Must be 10 digits"
+                    minLength={11}
+                    maxLength={11}
+                    title="Must be 11 digits"
                     value={props.val}
                     onChange={(e) => props.onchange(e.target.value)}
                 />
             </label>
-            <p className="validator-hint">Must be 10 digits</p>
+            <p className="validator-hint">Must be 11 digits</p>
         </div>
     );
 }
