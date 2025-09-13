@@ -22,7 +22,7 @@ const jost2 = Jost({
 export default function Page() {
   const [email , setEmail] = useState('');
   const [pw , setpw] = useState('');
-
+  const [clickedLogin, setClickedLogin] = useState(false);
   async function handleSubmit(e: React.FormEvent){
     e.preventDefault();
     try{
@@ -70,7 +70,8 @@ export default function Page() {
             <label className="label">Password</label>
             <input type="password" className="input" placeholder="Password" onChange={(e)=>{setpw(e.target.value)}} />
 
-            <button type="submit" className="btn btn-neutral mt-4">Login</button>
+            {!clickedLogin? 
+            <button onClick={()=>{setClickedLogin(true)}} type="submit" className="btn btn-neutral mt-4">Login</button> : <button className="btn"><span className="loading loading-spinner"></span>Logging in</button>}
           </fieldset>
           </form>
           <h1 className='mx-auto mt-2 mb-0'>or</h1>

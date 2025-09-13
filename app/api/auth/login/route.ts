@@ -23,7 +23,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // 1️⃣ Fetch user by email
+    // Fetch user by email
     const { data: user, error } = await supabase
       .from('users')
       .select('*')
@@ -34,26 +34,26 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
     }
 
-    // 2️⃣ Validate password using bcrypt
+    // Validate password using bcrypt
     const isPasswordValid = await bcrypt.compare(pw, user.pw);
     if (!isPasswordValid) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 });
     }
 
-    // 3️⃣ Create JWT payload
+    // Create JWT payload
     const tokenPayload = {
       user_id: user.user_id,
       email: user.email,
       role: user.role,
     };
 
-    // 4️⃣ Generate JWT
+    // Generate JWT
     const token = jwt.sign(tokenPayload, JWT_SECRET, { expiresIn: '7d' }); // token valid for 7 days
 
-    // 5️⃣ Remove password before sending back
+    // Remove password before sending back
     const { pw: _, ...userWithoutPassword } = user;
 
-    // 6️⃣ Return success response with JWT
+    // Return success response with JWT
     const response = NextResponse.json({
         message: 'Login successful',
         token,

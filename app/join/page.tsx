@@ -29,6 +29,7 @@ export default function Page() {
     const [university , setUniversity] = useState('KUET');
     const [batch , setBatch] = useState('2021');
     const [dept , setdept] = useState('CSE');
+    const [clickedJoin, setClickedJoin] = useState(false);
 
     async function handleSubmit(e: React.FormEvent){
         e.preventDefault();
@@ -116,8 +117,11 @@ export default function Page() {
                     <select value={dept} className="select select-success" onChange={(e) => setdept(e.target.value)}>
                         <option>CSE</option>
                     </select>
-                </div>  
-            <button type='submit' onClick={handleSubmit} className={` ${allOk() ? '' : 'opacity-50 pointer-events-none'} btn btn-xs h-10 lg:w-20 md:w-10 bg-blue-950 mt-5 flex flex-row align-items`}>Join</button>
+                </div>
+            {!clickedJoin?  
+            <button type='submit' onClick={handleSubmit} className={` ${allOk() ? '' : 'opacity-50 pointer-events-none'} btn btn-xs h-10 md:w-10 lg:w-20 bg-blue-950 mt-5 flex flex-row align-items`}>Join</button>
+            :
+            <button className="btn btn-xs h-10 w-fit mt-5 flex flex-row align-items"><span className="loading loading-spinner"></span>Signing Up</button>}
             <br/>
             </div>
 
