@@ -71,7 +71,7 @@ export default function Page() {
             <input type="password" className="input" placeholder="Password" onChange={(e)=>{setpw(e.target.value)}} />
 
             {!clickedLogin? 
-            <button onClick={()=>{setClickedLogin(true)}} type="submit" className="btn btn-neutral mt-4">Login</button> : <button className="btn"><span className="loading loading-spinner"></span>Logging in</button>}
+            <button onClick={()=>{setClickedLogin(true)}} type="submit" className="btn btn-neutral mt-4">Login</button> : <button className="btn mt-4"><span className="loading loading-spinner"></span>Logging in</button>}
           </fieldset>
           </form>
           <h1 className='mx-auto mt-2 mb-0'>or</h1>

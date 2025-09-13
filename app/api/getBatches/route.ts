@@ -22,14 +22,14 @@ export async function POST() {
     }
 
     return NextResponse.json(
-      { batches: data },
-      { status: 200 }
+        { batches: data },
+        { status: 200 }
     );
   } catch (error) {
     console.error('Unexpected error:', error);
     return NextResponse.json(
-      { error: 'Unexpected server error' },
-      { status: 500 }
+        { error: 'Unexpected server error' },
+        { status: 500 }
     );
   }
 }
