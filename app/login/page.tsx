@@ -38,7 +38,6 @@ export default function Page() {
         });
         const data = await res.json();
         if (res.ok) {
-            alert('Logged in successfully!');
             // Save the token in localStorage or cookies
             localStorage.setItem('token', data.token);
             window.location.href = '/';

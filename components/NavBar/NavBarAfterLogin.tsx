@@ -11,15 +11,22 @@ const jost = Jost({
 });
 
 export default function NavBar() {
-    function logOut() {
-    // Remove token from localStorage (client-side storage)
-    localStorage.removeItem('token');
+    async function logOut() {
+        try {
+            // Call the logout API to clear the httpOnly cookie on the server
+            const res = await fetch("/api/auth/logout", { method: "POST" });
+            if (!res.ok) throw new Error("Logout failed");
 
-    // Remove token from cookies
-    document.cookie = "token=; path=/; max-age=0;";
+            // Remove token from localStorage (client-side storage)
+            localStorage.removeItem('token');
 
-    // Redirect to home
-    window.location.href = '/';
+            // Redirect to home (full page reload to trigger server component re-render)
+            window.location.href = '/';
+        } catch (err) {
+            console.error("Logout error:", err);
+            // Fallback: force reload anyway
+            window.location.href = '/';
+        }
     }
 
     return (
