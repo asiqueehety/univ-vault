@@ -5,6 +5,9 @@ export default function Notes(){
         <div className={`grid grid-cols-[5fr_13fr]`}>
             {/*Notes filter*/}
             <NotesFilter/>
+
         </div>
+        
+
     );
 }
