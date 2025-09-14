@@ -9,8 +9,7 @@ const supabase = createClient(
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const dbdata = body;
+    const {dbdata} = await req.json();
 
     console.log(dbdata);
     // Validate
@@ -34,6 +33,7 @@ export async function POST(req: Request) {
       console.error(error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
+
 
     return NextResponse.json({ message: "Inserted material successfully", data });
   } catch (err) {

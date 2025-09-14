@@ -4,11 +4,12 @@ import Link from "next/link";
 import {useState , useEffect} from "react";
 
 export default function UploadNotes(){
-    const [courses, setCourses] = useState<Array<string>>([]);
-    const [selectedCourse, setSelectedCourse] = useState("");
+    const [courses, setCourses] = useState<Array<{ c_id: number; c_name: string }>>([]);
+    const [selectedCourseId, setSelectedCourseId] = useState<number | null>(null);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<File | null>(null);
+    const [fileURL, setFileURL] = useState("");
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -21,7 +22,7 @@ export default function UploadNotes(){
             });
             const data = await res.json();
 
-            setCourses(data.courses.map((c: { c_name: string }) => c.c_name));
+            setCourses(data.courses);
         } catch (err) {
             console.error('Error fetching courses:', err);
         }
@@ -29,17 +30,97 @@ export default function UploadNotes(){
         fetchCourses();
     },[]);
 
-    function uploadedFile(){
-        //write code for the file upload here
-    }
+    const uploadedFile = async (e : React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        setFile(file);
+        const formData = new FormData();
+        formData.append('file', file);
 
-    async function handleSubmit(){
-        if(!title || !description || !selectedCourse || !file){
-            alert("Please fill all required fields");
+        try {
+            const res = await fetch('/api/upload/files/local', {
+            method: 'POST',
+            body: formData,
+            });
+
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.error || 'Upload failed');
+            }
+            const imageUrl = data.url;
+
+            setFileURL(imageUrl);
+            console.log("Image uploaded:", imageUrl);
+
+        } catch (err) {
+            console.error("Upload failed:", err);
+        }
+    };
+
+    const handleSubmit = async () => {
+        if (!title || !selectedCourseId || !file) {
+            alert("Please fill in all required fields and upload a file.");
             return;
         }
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("User not logged in or token missing.");
+            return;
+        }
+        // Get user securely from Supabase
+        const res = await fetch('/api/getCurrentUser',
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            
+        });
+        const user = await res.json();
+
+        if (!user?.user_id) {
+            alert("User not logged in.");
+            return;
+        }
+
+        const provider_id = user.user_id; // Secure, verified user_id
+        const m_type = "note";
+
+        //i have obtained courses like an object which are: 
+        const course_id = selectedCourseId // Assuming course IDs are 1-based indices
+        const m_title = title;
+
+        const dbdata = {
+            provider_id:provider_id,
+            m_type:m_type,
+            course_id:course_id,
+            m_title:m_title,
+            m_description: description,
+            file_location: fileURL,
+            con_id:1,
+        }
+
+        try {
+            const res = await fetch('/api/upload/materials', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    dbdata
+                }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+                window.location.href = '/';
+            } else {
+                alert(`Error: ${data.error}`);
+            }
+        } catch (err) {
+            console.error("Upload failed:", err);
+        }
+    };
         
-    }
     return(
         <div>
             <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-xl *:w-xl border p-4 mx-auto my-auto">
@@ -50,21 +131,26 @@ export default function UploadNotes(){
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Course</legend>
                     <div className="flex flex-1">
-                        <select defaultValue="Select a course" className="select w-full" onChange={(e) => setSelectedCourse(e.target.value)}>
-                            <option disabled={true}>Select a course</option>
-                            {
-                                courses.map((course, index) => (
-                                    <option key={index} value={course}>{course}</option>
-                                ))
-                            }
+                        <select
+                            defaultValue=""
+                            className="select w-full"
+                            onChange={(e) => setSelectedCourseId(Number(e.target.value))}
+                            >
+                            <option value="" disabled>Select a course</option>
+                            {courses.map((course) => (
+                                <option key={course.c_id} value={course.c_id}>
+                                {course.c_name}
+                                </option>
+                            ))}
                         </select>
+
                         <span className="label text-red-500 ml-4">Required</span>
                     </div> 
                 </fieldset>
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Description</legend>
                     <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-50 w-full" placeholder="Add a little description about the note you're providing. You may add details about the content or context of the note, who the teacher was for this particular course, which particular topics are present or absent in this note."></textarea>
-                    <div className="label">Optional</div>
+                    <div className="label text-red-600">Required</div>
                 </fieldset>
 
                 <input type="file" onChange={uploadedFile} className="file-input file-input-sm mt-4" />
