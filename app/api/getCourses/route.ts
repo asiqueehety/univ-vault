@@ -10,7 +10,7 @@ export async function POST() {
   try {
     const { data, error } = await supabase
       .from('courses')
-      .select('c_name',)
+      .select('c_id , c_name')
       .order('c_name',{ascending: true }); // Equivalent to SELECT c_name FROM courses
 
     if (error) {
