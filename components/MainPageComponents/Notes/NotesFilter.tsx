@@ -81,7 +81,7 @@ export default function NotesFilter(){
             </div>
             
             {coursesSelected &&
-            <form className="mt-0 overflow-y-auto h-70 md:h-90 lg:h-135 p-0">
+            <form className="mt-0 overflow-y-auto h-70 md:h-90 lg:h-150 p-0">
                 <div className='flex justify-right'>
                     <input type="text" placeholder="Search" className="input input-bordered w-24 h-8 md:w-auto m-2 mb-0" 
                     value={search}
@@ -112,7 +112,7 @@ export default function NotesFilter(){
                 )}
             </form>}
             {batchesSelected &&
-            <form className="mt-0 overflow-y-auto h-70 md:h-90 lg:h-135 p-2">
+            <form className="mt-0 overflow-y-auto h-70 md:h-90 lg:h-140 p-2">
                 <div className='flex justify-right'>
                     <input type="text" placeholder="Search" className="input input-bordered w-24 h-8 md:w-auto m-2 mb-0" 
                     value={search}
