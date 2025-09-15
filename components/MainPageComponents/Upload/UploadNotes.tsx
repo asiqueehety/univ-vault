@@ -97,7 +97,7 @@ export default function UploadNotes(){
             m_title:m_title,
             m_description: description,
             file_location: fileURL,
-            con_id:1,
+            con_points:10,
         }
 
         try {
