@@ -10,15 +10,37 @@ export default function UploadSlides(){
     const [description, setDescription] = useState("");
     const [file, setFile] = useState<File | null>(null);
     const [fileURL, setFileURL] = useState("");
-
+    const [depts, setDepts] = useState<Array<{ t_dept_name: string }>>([]);
+    const [selectedDepartment, setSelectedDepartment] = useState<string>("");
+    const [teachers, setTeachers] = useState<Array<{ t_id: number; t_name: string }>>([]);
+    const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
     useEffect(() => {
-        const fetchCourses = async () => {
+        const fetchDepts = async () => {
+        try {
+            const res = await fetch('/api/getDepts', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            });
+            const data = await res.json();
+
+            setDepts(data.depts);
+        } catch (err) {
+            console.error('Error fetching Depts:', err);
+        }
+    };
+        fetchDepts();
+    },[]);
+
+    const fetchCourses = async (department : string) => {
         try {
             const res = await fetch('/api/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ department }),
             });
             const data = await res.json();
 
@@ -27,8 +49,23 @@ export default function UploadSlides(){
             console.error('Error fetching courses:', err);
         }
     };
-        fetchCourses();
-    },[]);
+
+    const fetchTeachers = async (department : string) => {
+        try {
+            const res = await fetch('/api/getTeachers', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ department }),
+            });
+            const data = await res.json();
+
+            setTeachers(data.teachers);
+        } catch (err) {
+            console.error('Error fetching teachers:', err);
+        }
+    };
 
     const uploadedFile = async (e : React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -83,9 +120,9 @@ export default function UploadSlides(){
             return;
         }
 
-        const provider_id = user.user_id;
+        const provider_id = user.user_id; // Secure, verified user_id
         const m_type = "slide";
-        const course_id = selectedCourseId
+        const course_id = selectedCourseId // Assuming course IDs are 1-based indices
         const m_title = title;
 
         const dbdata = {
@@ -96,6 +133,7 @@ export default function UploadSlides(){
             m_description: description,
             file_location: fileURL,
             con_points:4,
+            selectedTeacherId: selectedTeacherId
         }
 
         try {
@@ -118,13 +156,41 @@ export default function UploadSlides(){
             console.error("Upload failed:", err);
         }
     };
+
+    function allOk(){
+        return (!!title && !!selectedCourseId && !!fileURL && !!description && !!selectedTeacherId);
+    }
         
     return(
         <div>
             <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-xl *:w-xl border p-4 mx-auto my-auto">
                 <legend className="fieldset-legend text-3xl">Contribute a Slide</legend>
                 <label className="label">Title</label>
-                <input type="text" className="input" placeholder={`eg: Lecture slides on 'C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
+                <input type="text" className="input" placeholder={`eg: C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
+
+                <fieldset className="fieldset">
+                    <legend className="fieldset-legend">Department of the course</legend>
+                    <div className="flex-1">
+                        <select defaultValue="Select a department" className="select"
+                        onChange={(e) => {
+                            const dept = e.target.value;
+                            setSelectedDepartment(dept);
+                            fetchCourses(dept);
+                            fetchTeachers(dept);
+                        }}
+
+                        >
+                            <option disabled={true}>Select a department</option>
+                            {!depts && <span className="loading loading-dots loading-lg"></span>}
+                            {depts.map((dept, index) => (
+                                <option key={index} value={dept}>
+                                {dept}
+                                </option>
+                            ))}
+                        </select>
+                        <span className="label text-red-500 ml-5">Required</span>
+                    </div>
+                </fieldset>
 
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Course</legend>
@@ -135,28 +201,47 @@ export default function UploadSlides(){
                             onChange={(e) => setSelectedCourseId(Number(e.target.value))}
                             >
                             <option value="" disabled>Select a course</option>
+                            
+                            {!courses && <span className="loading loading-dots loading-lg"></span>}
                             {courses.map((course) => (
                                 <option key={course.c_id} value={course.c_id}>
                                 {course.c_name}
                                 </option>
                             ))}
                         </select>
-
+                        <span className="label text-red-500 ml-4">Required</span>
+                    </div> 
+                </fieldset>
+                <fieldset className="fieldset">
+                    <legend className="fieldset-legend">Course teacher</legend>
+                    <div className="flex flex-1">
+                        <select
+                            defaultValue=""
+                            className="select w-full"
+                            onChange={(e) => setSelectedTeacherId(Number(e.target.value))}
+                            >
+                            <option value="" disabled>Select the course teacher</option>
+                            {!teachers && <span className="loading loading-dots loading-lg"></span>}
+                            {teachers.map((teacher) => (
+                                <option key={teacher.t_id} value={teacher.t_id}>
+                                {teacher.t_name}
+                                </option>
+                            ))}
+                        </select>
                         <span className="label text-red-500 ml-4">Required</span>
                     </div> 
                 </fieldset>
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Description</legend>
-                    <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-50 w-full" placeholder="Add a little description about the slide you're providing. You may add details about the content or context of the slide, who the teacher was for this particular course, which particular topics are present or absent in this slide."></textarea>
+                    <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-30 w-full" placeholder="Add a little description about the slide you're providing. You may add details about the content or context of the slide, who the teacher was for this particular course, which particular topics are present or absent in this slide."></textarea>
                     <div className="label text-red-600">Required</div>
                 </fieldset>
+                
 
-                <input type="file" onChange={uploadedFile} className="file-input file-input-sm mt-4" 
-                accept=".pdf,.ppt,.pptx,.key,.odp"
-                />
+                <input type="file" onChange={uploadedFile} className="file-input file-input-sm mt-4" />
                 <div className="flex justify-between mt-8">
                     <Link href="/" className="btn btn-dash btn-warning mx-auto">Cancel</Link>
-                    <button onClick={handleSubmit} className="btn btn-soft btn-accent mx-auto">Upload</button>
+                    <button onClick={handleSubmit} className={` ${!allOk ? 'opacity-50 cursor-not-allowed':''} btn btn-soft btn-accent mx-auto`} >Upload</button>
                 </div>
             </fieldset>
         </div>

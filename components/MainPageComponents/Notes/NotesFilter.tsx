@@ -15,11 +15,13 @@ export default function NotesFilter(){
     useEffect(() => {
         const fetchCourses = async () => {
         try {
+
             const res = await fetch('/api/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ department: "" }),
             });
 
             const data = await res.json();
@@ -28,7 +30,7 @@ export default function NotesFilter(){
         } catch (err) {
             console.error('Error fetching courses:', err);
         } finally {
-            setLoading(false); // <-- Stop loading once fetch is complete
+            setLoading(false);
         }
         };
 

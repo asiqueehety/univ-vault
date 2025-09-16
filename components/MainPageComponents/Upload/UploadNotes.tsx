@@ -10,15 +10,37 @@ export default function UploadNotes(){
     const [description, setDescription] = useState("");
     const [file, setFile] = useState<File | null>(null);
     const [fileURL, setFileURL] = useState("");
-
+    const [depts, setDepts] = useState<Array<{ t_dept_name: string }>>([]);
+    const [selectedDepartment, setSelectedDepartment] = useState<string>("");
+    const [teachers, setTeachers] = useState<Array<{ t_id: number; t_name: string }>>([]);
+    const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
     useEffect(() => {
-        const fetchCourses = async () => {
+        const fetchDepts = async () => {
+        try {
+            const res = await fetch('/api/getDepts', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            });
+            const data = await res.json();
+
+            setDepts(data.depts);
+        } catch (err) {
+            console.error('Error fetching Depts:', err);
+        }
+    };
+        fetchDepts();
+    },[]);
+
+    const fetchCourses = async (department : string) => {
         try {
             const res = await fetch('/api/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ department }),
             });
             const data = await res.json();
 
@@ -27,8 +49,23 @@ export default function UploadNotes(){
             console.error('Error fetching courses:', err);
         }
     };
-        fetchCourses();
-    },[]);
+
+    const fetchTeachers = async (department : string) => {
+        try {
+            const res = await fetch('/api/getTeachers', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ department }),
+            });
+            const data = await res.json();
+
+            setTeachers(data.teachers);
+        } catch (err) {
+            console.error('Error fetching teachers:', err);
+        }
+    };
 
     const uploadedFile = async (e : React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -85,8 +122,6 @@ export default function UploadNotes(){
 
         const provider_id = user.user_id; // Secure, verified user_id
         const m_type = "note";
-
-        //i have obtained courses like an object which are: 
         const course_id = selectedCourseId // Assuming course IDs are 1-based indices
         const m_title = title;
 
@@ -98,6 +133,7 @@ export default function UploadNotes(){
             m_description: description,
             file_location: fileURL,
             con_points:10,
+            selectedTeacherId: selectedTeacherId
         }
 
         try {
@@ -129,6 +165,29 @@ export default function UploadNotes(){
                 <input type="text" className="input" placeholder={`eg: Lecture notes on 'C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
 
                 <fieldset className="fieldset">
+                    <legend className="fieldset-legend">Department of the course</legend>
+                    <div className="flex-1">
+                        <select defaultValue="Select a department" className="select"
+                        onChange={(e) => {
+                            const dept = e.target.value;
+                            setSelectedDepartment(dept);
+                            fetchCourses(dept);
+                            fetchTeachers(dept);
+                        }}
+
+                        >
+                            <option disabled={true}>Select a department</option>
+                            {depts.map((dept, index) => (
+                                <option key={index} value={dept}>
+                                {dept}
+                                </option>
+                            ))}
+                        </select>
+                        <span className="label text-red-500 ml-5">Required</span>
+                    </div>
+                </fieldset>
+
+                <fieldset className="fieldset">
                     <legend className="fieldset-legend">Course</legend>
                     <div className="flex flex-1">
                         <select
@@ -143,15 +202,33 @@ export default function UploadNotes(){
                                 </option>
                             ))}
                         </select>
-
+                        <span className="label text-red-500 ml-4">Required</span>
+                    </div> 
+                </fieldset>
+                <fieldset className="fieldset">
+                    <legend className="fieldset-legend">Course teacher</legend>
+                    <div className="flex flex-1">
+                        <select
+                            defaultValue=""
+                            className="select w-full"
+                            onChange={(e) => setSelectedTeacherId(Number(e.target.value))}
+                            >
+                            <option value="" disabled>Select the course teacher</option>
+                            {teachers.map((teacher) => (
+                                <option key={teacher.t_id} value={teacher.t_id}>
+                                {teacher.t_name}
+                                </option>
+                            ))}
+                        </select>
                         <span className="label text-red-500 ml-4">Required</span>
                     </div> 
                 </fieldset>
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Description</legend>
-                    <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-50 w-full" placeholder="Add a little description about the note you're providing. You may add details about the content or context of the note, who the teacher was for this particular course, which particular topics are present or absent in this note."></textarea>
+                    <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-30 w-full" placeholder="Add a little description about the note you're providing. You may add details about the content or context of the note, who the teacher was for this particular course, which particular topics are present or absent in this note."></textarea>
                     <div className="label text-red-600">Required</div>
                 </fieldset>
+                
 
                 <input type="file" onChange={uploadedFile} className="file-input file-input-sm mt-4" />
                 <div className="flex justify-between mt-8">

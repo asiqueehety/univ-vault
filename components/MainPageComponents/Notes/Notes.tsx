@@ -6,6 +6,7 @@ export default function Notes(){
             {/*Notes filter*/}
             <NotesFilter/>
 
+            {}
         </div>
         
 
