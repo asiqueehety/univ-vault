@@ -1,9 +1,8 @@
 import Link from "next/link";
 import PageTransitionWrapper from "../PageTransitionWrapper";
 import Notes from "./Notes/Notes";
-import { Notebook } from "lucide";
 import Slides from "./Slides/Slides";
-
+import Books from "./Books/Books";
 
 export default function OpeningPage(){
     return(
@@ -23,7 +22,9 @@ export default function OpeningPage(){
             </div>
 
             <input type="radio" name="my_tabs_2" className="tab" aria-label="Books" />
-            <div className="tab-content bg-base-100 p-3">Tab content 3</div>
+            <div className="tab-content bg-base-100 p-3">
+                <Books/>
+            </div>
 
             <input type="radio" name="my_tabs_2" className="tab" aria-label="Courses" />
             <div className="tab-content bg-base-100 p-3">Tab content 3</div>

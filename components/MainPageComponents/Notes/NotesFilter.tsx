@@ -71,7 +71,7 @@ export default function NotesFilter(){
 
 
     return(
-        <div className={`bg-neutral-900 p-1 rounded-3xl`}>
+        <div className={`bg-neutral-900 p-1 rounded-3xl sticky`}>
             <div className="filter">
                 <input className="btn btn-xs filter-reset bg-amber-800 py-0 h-fit w-fit my-auto" type="radio" name="metaframeworks" aria-label="All"
                 onChange={()=>{setCoursesSelected(false);setBatchesSelected(false);}}/>
