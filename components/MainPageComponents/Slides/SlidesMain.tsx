@@ -1,15 +1,15 @@
 'use client'
 
-import NotesCard from "./NotesCard";
+import SlidesCard from "./SlidesCard";
 import { useEffect, useState } from "react";
-import { FilterState } from "./Notes";
+import { FilterState } from "./Slides";
 
-interface NotesMainProps {
+interface SlidesMainProps {
   filterState: FilterState;
 }
 
-export default function NotesMain({ filterState }: NotesMainProps) {
-  interface Note {
+export default function SlidesMain({ filterState }: SlidesMainProps) {
+  interface Slide {
     m_id: number;
     provider_id: number;
     m_type: string;
@@ -27,41 +27,42 @@ export default function NotesMain({ filterState }: NotesMainProps) {
     t_dept_name: string;
   }
 
-  const [notesList, setNotesList] = useState<Note[]>([]);
+  const [slidesList, setSlidesList] = useState<Slide[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const groupNotesByCourse = (notes: Note[]) =>
-    notes.reduce<Record<string, Note[]>>((acc, note) => {
-      if (!acc[note.c_name]) acc[note.c_name] = [];
-      acc[note.c_name].push(note);
+  const groupSlidesByCourse = (slides: Slide[]) =>
+    slides.reduce<Record<string, Slide[]>>((acc, slide) => {
+      if (!acc[slide.c_name]) acc[slide.c_name] = [];
+      acc[slide.c_name].push(slide);
       return acc;
     }, {});
 
-  const getFilteredNotes = (notes: Note[]): Note[] => {
+  const getFilteredSlides = (slides: Slide[]): Slide[] => {
     if (filterState.type === 'all' || !filterState.value) {
-      return notes;
+      return slides;
     }
     
     if (filterState.type === 'course') {
-      return notes.filter(note => note.c_name === filterState.value);
+      return slides.filter(slide => slide.c_name === filterState.value);
     }
     
-    if (filterState.type === 'batch') {
-      return notes.filter(note => note.batch === filterState.value);
+    if (filterState.type === 'teacher') {
+      return slides.filter(slide => slide.t_name === filterState.value);
     }
     
-    return notes;
+    return slides;
   };
 
   useEffect(() => {
-    async function fetchNotes() {
+    async function fetchSlides() {
       try {
         setLoading(true);
         setError(null);
-    
-        const res = await fetch('/api/getNotes', {
-          method: 'POST',
+        
+        console.log('Fetching slides from API...');
+        const res = await fetch('/api/getSlides', {
+          method: 'POST', // matches backend
           headers: { 'Content-Type': 'application/json' },
         });
 
@@ -69,34 +70,34 @@ export default function NotesMain({ filterState }: NotesMainProps) {
         console.log('Response ok:', res.ok);
 
         if (!res.ok) {
-          const text = await res.text();
-          console.error('Failed to fetch notes:', text);
-          setError(`Failed to fetch notes: ${res.status} ${res.statusText}`);
+          const text = await res.text(); // debug HTML responses
+          console.error('Failed to fetch slides:', text);
+          setError(`Failed to fetch slides: ${res.status} ${res.statusText}`);
           return;
         }
 
-        const data: Note[] = await res.json();
+        const data: Slide[] = await res.json();
         
         if (!Array.isArray(data)) {
+          console.error('Data is not an array:', data);
           setError('Invalid data format received from server');
           return;
         }
         
-        setNotesList(data);
+        setSlidesList(data);
       } catch (err) {
-        console.error('Error fetching notes:', err);
+        console.error('Error fetching slides:', err);
         setError(err instanceof Error ? err.message : 'Unknown error occurred');
       } finally {
         setLoading(false);
       }
     }
 
-    fetchNotes();
+    fetchSlides();
   }, []);
 
-  // Apply filtering to the notes list
-  const filteredNotes = getFilteredNotes(notesList);
-  const groupedNotes = groupNotesByCourse(filteredNotes);
+  const filteredSlides = getFilteredSlides(slidesList);
+  const groupedSlides = groupSlidesByCourse(filteredSlides);
 
   if (loading) {
     return (
@@ -116,30 +117,30 @@ export default function NotesMain({ filterState }: NotesMainProps) {
     );
   }
 
-  if (notesList.length === 0) {
+  if (slidesList.length === 0) {
     return (
       <div className="p-6 flex items-center justify-center h-[80vh]">
-        <div className="text-xl">No notes found</div>
+        <div className="text-xl text-white/20">No slides found</div>
       </div>
     );
   }
 
-  if (filteredNotes.length === 0 && filterState.type !== 'all') {
+  if (filteredSlides.length === 0 && filterState.type !== 'all') {
     return (
       <div className="p-6 flex items-center justify-center h-[80vh]">
-        <div className="text-xl text-white/20">No notes found</div>
+        <div className="text-xl text-white/20">No slides found</div>
       </div>
     );
   }
 
   return (
     <div className="p-6 overflow-y-auto h-[80vh]">
-      {Object.entries(groupedNotes).map(([courseName, notes]) => (
+      {Object.entries(groupedSlides).map(([courseName, slides]) => (
         <div key={courseName} className="mb-6">
           <h2 className="text-3xl my-3 bg-black/20 rounded-xl p-3">{courseName}</h2>
           <div className="flex flex-wrap gap-4">
-            {notes.map((note) => (
-              <NotesCard key={note.m_id} note={note} />
+            {slides.map((slide) => (
+              <SlidesCard key={slide.m_id} slide={slide} />
             ))}
           </div>
           <div className="divider"></div>

@@ -1,16 +1,22 @@
 'use client';
 
 import { useState , useEffect } from "react";
+import { FilterState } from "./Notes";
 
+interface NotesFilterProps {
+    filterState: FilterState;
+    setFilterState: (state: FilterState) => void;
+}
 
-export default function NotesFilter(){
+export default function NotesFilter({ filterState, setFilterState }: NotesFilterProps){
 
     const [courses, setCourses] = useState<Array<string>>([]);
     const [batches, setBatches] = useState<Array<string>>([]);
-    const [coursesSelected, setCoursesSelected] = useState(false);
-    const [batchesSelected, setBatchesSelected] = useState(false);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
+    
+    const coursesSelected = filterState.type === 'course';
+    const batchesSelected = filterState.type === 'batch';
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -74,12 +80,15 @@ export default function NotesFilter(){
         <div className={`bg-neutral-900 p-1 rounded-3xl sticky`}>
             <div className="filter">
                 <input className="btn btn-xs filter-reset bg-amber-800 py-0 h-fit w-fit my-auto" type="radio" name="metaframeworks" aria-label="All"
-                onChange={()=>{setCoursesSelected(false);setBatchesSelected(false);}}/>
+                checked={filterState.type === 'all'}
+                onChange={()=>{setFilterState({ type: 'all', value: '' });}}/>
                 <p className="my-auto text-xs bg-black/0 border-none w-fit p-1 rounded-xl">Filter by</p>
                 <input className="btn text-xs bg-cyan-950 w-fit p-1 rounded-xl" type="radio" name="metaframeworks" aria-label="Courses"
-                onChange={()=>{setCoursesSelected(true);setBatchesSelected(false);}}/>
+                checked={filterState.type === 'course'}
+                onChange={()=>{setFilterState({ type: 'course', value: '' });}}/>
                 <input className="btn text-xs bg-cyan-950 w-fit p-1 rounded-xl" type="radio" name="metaframeworks" aria-label="Batches"
-                onChange={()=>{setCoursesSelected(false);setBatchesSelected(true);}}/>
+                checked={filterState.type === 'batch'}
+                onChange={()=>{setFilterState({ type: 'batch', value: '' });}}/>
             </div>
             
             {coursesSelected &&
@@ -93,8 +102,9 @@ export default function NotesFilter(){
                 <br/>
                 <input
                 className="btn btn-xs bg-neutral-600 m-0.5 btn-square text-xs"
-                type="reset"
+                type="button"
                 value="×"
+                onClick={() => setFilterState({ type: 'all', value: '' })}
                 />
                 {loading ? (
                 <span className="loading loading-spinner mx-auto"></span>
@@ -103,10 +113,12 @@ export default function NotesFilter(){
                     <input
                     key={index}
                     className="btn btn-sm m-0.5 p-0.5 bg-black/10"
-                    type="checkbox"
+                    type="radio"
                     name="frameworks"
                     aria-label={course}
                     value={course}
+                    checked={filterState.type === 'course' && filterState.value === course}
+                    onChange={() => setFilterState({ type: 'course', value: course })}
                     />
                 ))
                 ) : (
@@ -123,8 +135,9 @@ export default function NotesFilter(){
                 </div>
                 <br/>
                 <input className="btn btn-xs bg-neutral-600 m-0.5 btn-square text-xs"
-                type="reset"
+                type="button"
                 value="×"
+                onClick={() => setFilterState({ type: 'all', value: '' })}
                 />
                 {loading ? (
                 <span className="loading loading-spinner mx-auto"></span>
@@ -133,10 +146,12 @@ export default function NotesFilter(){
                     <input
                     key={index}
                     className="btn btn-sm m-0.5 p-0.5 bg-black/10"
-                    type="checkbox"
+                    type="radio"
                     name="frameworks"
                     aria-label={batch}
                     value={batch}
+                    checked={filterState.type === 'batch' && filterState.value === batch}
+                    onChange={() => setFilterState({ type: 'batch', value: batch })}
                     />
                 ))
                 ) : (
