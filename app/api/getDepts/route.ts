@@ -14,8 +14,7 @@ export async function POST() {
   .order('t_dept_name', { ascending: true });
 
     if (error) throw error;
-
-    // Remove duplicates in JS
+    
     const uniqueDepartments = [...new Set(data.map(item => item.t_dept_name))];
 
     if (error) {
