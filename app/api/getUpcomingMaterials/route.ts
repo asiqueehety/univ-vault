@@ -41,6 +41,15 @@ export async function POST(req: Request) {
         { status: 500 }
       );
     }
+    for(let i=0;i<data.length;i++)
+    {
+        const sch = data[i];
+        if(sch.sch_materials==null)
+        {
+            sch.sch_materials=[];
+            continue;
+        }
+    }
     return NextResponse.json(
       { scheduled: data },
       { status: 200 }

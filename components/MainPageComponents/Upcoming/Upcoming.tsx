@@ -37,6 +37,7 @@ export default function Upcoming(){
 
     useEffect(() => {
         if (!selectedDate) return;
+        setSched([]);
         const dateStr = selectedDate.toISOString().split("T")[0];
         const d = new Date(dateStr);
         if (isNaN(d.getTime())) {

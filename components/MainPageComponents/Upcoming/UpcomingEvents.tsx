@@ -1,5 +1,30 @@
 import UpcomingCards from "./UpcomingCards";
-import { ScheduledEvent } from '../../../app/types/scheduled';
+
+interface ScheduledEvent{
+    sch_id:number,
+    sch_type:string,
+    sch_date:Date,
+    sch_course:
+    {
+        c_id:number,
+        c_name:string,
+        c_dept:string
+    },
+    sch_batch:string,
+    sch_materials:
+    {
+        m_id:number,
+        provider_id:number,
+        m_type:string,
+        course_id:number,
+        m_title:string,
+        m_description:string,
+        file_location:string,
+        con_points:number
+    }[],
+    sch_dept_name:string,
+    sch_shortnote:string
+}
 
 type schedProps = {
     scheduled: ScheduledEvent[]
@@ -17,7 +42,7 @@ export default function UpcomingEvents({scheduled}:schedProps){
     }
 
     return(
-        <div>
+        <div className="flex flex-row flex-wrap">
             {scheduled.map((event) => (
                 <UpcomingCards key={event.sch_id} event={event} />
             ))}
