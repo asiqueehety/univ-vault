@@ -1,21 +1,16 @@
-'use client'
-import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
-export default function CustomDayPicker() {
-  const [selected, setSelected] = useState<Date>();
+export default function CustomDayPicker({selectedDate, setSelectedDate}: {selectedDate?: Date, setSelectedDate?: (date: Date | undefined) => void}) {
 
   return (
     <div className="p-4 bg-black/10 rounded-lg shadow-lg">
       <DayPicker
         mode="single"
-        selected={selected}
-        onSelect={setSelected}
+        selected={selectedDate}
+        onSelect={setSelectedDate}
         footer={
-          selected
-            ? `Selected: ${selected.toLocaleDateString("en-CA")}`
-            : "Pick a day."
+          selectedDate? `Selected: ${selectedDate.toLocaleDateString("en-CA")}` : "Pick a day."
         }
       />
     </div>

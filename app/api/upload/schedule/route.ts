@@ -22,17 +22,22 @@ export async function POST(req: Request) {
         if(!dbdata.sch_dept_name){return NextResponse.json({ error: "Missing schedule department name" }, { status: 400 });}
     }
 
+    //i want to add a day in the date received
+    const date = new Date(dbdata.sch_date);
+    date.setDate(date.getDate() + 1);
+    dbdata.sch_date = date;
+
     const schedule = 
     {
         sch_date: dbdata.sch_date,
         sch_type: dbdata.sch_type,
         sch_course_id: dbdata.sch_course_id,
         sch_batch: dbdata.sch_batch,
-        sch_material_1: dbdata.sch_material_1,
-        sch_material_2: dbdata.sch_material_2,
-        sch_material_3: dbdata.sch_material_3,
-        sch_material_4: dbdata.sch_material_4,
-        sch_material_5: dbdata.sch_material_5,
+        sch_materials_id_1: dbdata.sch_material_1,
+        sch_materials_id_2: dbdata.sch_material_2,
+        sch_materials_id_3: dbdata.sch_material_3,
+        sch_materials_id_4: dbdata.sch_material_4,
+        sch_materials_id_5: dbdata.sch_material_5,
         sch_dept_name: dbdata.sch_dept_name,
         sch_shortnote: dbdata.sch_shortnote
     }

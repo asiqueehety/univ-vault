@@ -17,6 +17,7 @@ export default function UploadSchedule(){
     const [mid4, setMid4] = useState<number | null>(null);
     const [mid5, setMid5] = useState<number | null>(null);
     const [shortnote, setShortnote] = useState("");
+
     useEffect(() => {
         const fetchCourses = async (department : string) => {
         try {
@@ -30,10 +31,11 @@ export default function UploadSchedule(){
             const data = await res.json();
 
             setCourses(data.courses);
-        } catch (err) {
-            console.error('Error fetching courses:', err);
-        }
-    };
+            }catch (err)
+            {
+                console.error('Error fetching courses:', err);
+            }
+        };
         fetchCourses("");
     },[]);
 
@@ -69,8 +71,7 @@ export default function UploadSchedule(){
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
-            },
-            
+            },   
         });
         const user = await res.json();
 
@@ -170,10 +171,14 @@ export default function UploadSchedule(){
 
                 <div className="p-4 bg-neutral-950/30 rounded-lg shadow-lg">
                     <DayPicker
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    footer={date? `Selected: ${date.toLocaleDateString("en-CA")}`: type == "assignment"? "Pick the due date." : "Pick the date."}
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                        footer={
+                        date
+                            ? `Selected: ${date.toLocaleDateString("en-CA")}`
+                            : "Pick a day."
+                        }
                     />
                 </div>
 
