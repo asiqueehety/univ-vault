@@ -12,7 +12,7 @@ export default function Upcoming(){
     <{
         sch_id:number,
         sch_type:string,
-        sch_date:Date,
+        sch_date:string,
         sch_course:
         {
             c_id:number,
@@ -37,7 +37,6 @@ export default function Upcoming(){
 
     useEffect(() => {
         if (!selectedDate) return;
-        setSched([]);
         const dateStr = selectedDate.toISOString().split("T")[0];
         const d = new Date(dateStr);
         if (isNaN(d.getTime())) {
@@ -85,7 +84,7 @@ export default function Upcoming(){
                 console.error('Error fetching scheduled events:', err);
             }
         };
-        fetchScheduled(selectedDate);
+        fetchScheduled(d);
     }, [selectedDate]);
 
     return(

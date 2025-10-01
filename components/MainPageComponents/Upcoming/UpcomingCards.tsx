@@ -55,6 +55,7 @@ export default function UpcomingCards({event}:schedProps){
     }
     function when(){
         const now = new Date();
+        now.setDate(now.getDate()+1);
         const eventDate = new Date(event.sch_date);
         const diffTime = eventDate.getTime() - now.getTime();
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -99,7 +100,9 @@ export default function UpcomingCards({event}:schedProps){
                         <div className="badge size-fit bg-red-950 p-3 text-xl">{formatCustomDate(event.sch_date)}</div>
                         <div className="badge size-fit p-2 m-2">{when()}</div>
                     </div>
+
                     <p className={` ${f2.className} my-3`}>{event.sch_shortnote}</p>
+
                 </div>
             </div>
             }

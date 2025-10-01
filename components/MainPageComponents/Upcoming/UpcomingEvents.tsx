@@ -34,9 +34,11 @@ export default function UpcomingEvents({scheduled}:schedProps){
     scheduled.sort((a, b) => new Date(a.sch_date).getTime() - new Date(b.sch_date).getTime());
     if(scheduled.length === 0){
         return(
-            <div className="flex flex-col items-center justify-center p-4 border rounded-lg shadow-md w-full h-96">
-                <h2 className="text-2xl font-semibold mb-4">No Events Scheduled</h2>
-                <p className="text-gray-600">Please select a date to view scheduled events.</p>
+            <div className="flex w-52 flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
             </div>
         );
     }

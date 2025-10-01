@@ -12,7 +12,7 @@ export default function CustomDayPicker({selectedDate, setSelectedDate}: {select
   }
 
   return (
-    <div className="p-4 bg-black/10 rounded-lg shadow-lg h-fit">
+    <div className="p-4 bg-black/10 rounded-lg shadow-lg h-fit w-fit">
       <DayPicker
         mode="single"
         selected={selectedDate}

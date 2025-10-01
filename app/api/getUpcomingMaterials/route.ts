@@ -20,8 +20,9 @@ export async function POST(req: Request) {
       );
     }
     const today = new Date();
+    today.setDate(today.getDate() + 1); // Include today and future dates
     today.setHours(0, 0, 0, 0);
-    const date = body.date || today.toISOString().split("T")[0];
+    const date = body.sch_date || today.toISOString().split("T")[0];
     const dept = body.sch_dept;
     const batch = body.sch_batch;
 
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
             continue;
         }
     }
+    console.log('Fetched scheduled count for:',{date}, data);
     return NextResponse.json(
       { scheduled: data },
       { status: 200 }
