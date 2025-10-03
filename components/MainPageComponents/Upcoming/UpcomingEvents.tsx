@@ -44,7 +44,7 @@ export default function UpcomingEvents({scheduled}:schedProps){
     }
 
     return(
-        <div className="flex flex-row flex-wrap">
+        <div className="flex flex-row flex-wrap overflow-y-auto h-[82vh]">
             {scheduled.map((event) => (
                 <UpcomingCards key={event.sch_id} event={event} />
             ))}

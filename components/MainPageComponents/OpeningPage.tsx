@@ -5,13 +5,17 @@ import Slides from "./Slides/Slides";
 import Books from "./Books/Books";
 import Practice from "./Practice/Practice";
 import Upcoming from "./Upcoming/Upcoming";
-import Recommended from "./Recommended/Recommended";
 
 export default function OpeningPage(){
     return(
         <PageTransitionWrapper>
             <div className="tabs tabs-border justify-center">
 
+                <input type="radio" name="my_tabs_2" className="tab" aria-label="Upcoming" defaultChecked/>
+                <div className="tab-content bg-base-100 p-3">
+                    <Upcoming/>
+                </div>
+                
                 <input type="radio" name="my_tabs_2" className="tab" aria-label="Notes" />
                 <div className="tab-content bg-base-100 p-3">
                     <Notes/>
@@ -32,10 +36,6 @@ export default function OpeningPage(){
                     <Practice/>
                 </div>
 
-                <input type="radio" name="my_tabs_2" className="tab" aria-label="Upcoming" defaultChecked/>
-                <div className="tab-content bg-base-100 p-3">
-                    <Upcoming/>
-                </div>
 
             </div>
             <div className="fab h-full">

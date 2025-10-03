@@ -11,16 +11,19 @@ export default function CustomDayPicker({selectedDate, setSelectedDate}: {select
     return `${weekday}, ${day} ${month}, ${year}`;
   }
 
+  function isItToday(date:Date): boolean {
+    const today = new Date();
+    return date.getDate() === today.getDate();
+  }
+
   return (
-    <div className="p-4 bg-black/10 rounded-lg shadow-lg h-fit w-fit">
+    <div className="p-4 bg-black/10 rounded-lg shadow-lg h-fit w-fit flex flex-col justify-center">
       <DayPicker
         mode="single"
         selected={selectedDate}
         onSelect={setSelectedDate}
-        footer={
-          selectedDate? `${formatCustomDate(selectedDate)}` : "Pick a day."
-        }
       />
+      <h1 className="card card-lg my-2 mx-auto bg-neutral-900 p-2">{selectedDate? isItToday(selectedDate)? "Today":`${formatCustomDate(selectedDate)}` : "Pick a day."}</h1>
     </div>
   );
 }
