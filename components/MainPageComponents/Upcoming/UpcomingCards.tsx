@@ -84,7 +84,7 @@ export default function UpcomingCards({event}:schedProps){
         }
     };
     return(
-        <div className={`m-4 ${f1.className} flex flex-row justify-center`}>
+        <div className={`m-4 ${f1.className} flex flex-row justify-center min-h-[45dvh] h-fit`}>
             {event.sch_type == 'ct' || event.sch_type== 'assignment'?
             <div className="card bg-black/20 text-primary-content w-[23vw]">
                 <div className="card-body">
