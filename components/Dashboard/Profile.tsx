@@ -57,8 +57,8 @@ export default function Profile(){
             <h1 className="flex justify-center bg-white/10 rounded-xl m-0.5">Your profile</h1>
             {
             loading ? (
-                <div className="flex justify-center my-auto">
-                    <span className="loading loading-spinner loading-xs"></span>
+                <div className="flex justify-center align-items h-full">
+                    <span className="loading loading-spinner loading-lg"></span>
                 </div>
             ) : (
             <div>
