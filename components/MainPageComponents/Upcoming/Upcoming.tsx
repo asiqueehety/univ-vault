@@ -12,7 +12,7 @@ export default function Upcoming(){
     <{
         sch_id:number,
         sch_type:string,
-        sch_date:string,
+        sch_date:Date,
         sch_course:
         {
             c_id:number,

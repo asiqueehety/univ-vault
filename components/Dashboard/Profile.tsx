@@ -55,48 +55,50 @@ export default function Profile(){
     return(
         <div>
             <h1 className="flex justify-center bg-white/10 rounded-xl m-0.5">Your profile</h1>
+            <div>
             {
             loading ? (
                 <div className="flex justify-center align-items h-full">
                     <span className="loading loading-spinner loading-lg"></span>
                 </div>
             ) : (
-            <div>
-                <div className="m-1 p-2">
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center mb-0.5 text-white/20">Username</h1>
+                <div>
+                    <div className="m-1 p-2">
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center mb-0.5 text-white/20">Username</h1>
+                        </div>
+                        <p className={`bg-black/20 flex justify-center rounded-xl p-1`}>{profile?.name}</p>
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center my-0.5 text-white/20">Email</h1>
+                        </div>
+                        <p className="mt-2 flex justify-center"> {profile?.email}</p>
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center my-0.5 text-white/20">Phone</h1>
+                        </div>
+                        <p className="mt-2 flex justify-center"> {profile?.phone}</p>
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center my-0.5 text-white/20">Institution</h1>
+                        </div>
+                        <p className="mt-2 flex justify-center"> {profile?.institution}</p>
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center my-0.5 text-white/20">Department</h1>
+                        </div>
+                        <p className="mt-2 flex justify-center"> {profile?.dept}</p>
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center my-0.5 text-white/20">Batch</h1>
+                        </div>
+                        <p className="mt-2 flex justify-center"> {profile?.batch}</p>
+                        <div className="divider"> 
+                            <h1 className="text-xs flex justify-center my-0.5 text-white/20">Contribution Points</h1>
+                        </div>
+                        <p className="mt-2 flex justify-center"> {profile?.contribution_points}</p>
+                        
                     </div>
-                    <p className={`bg-black/20 flex justify-center rounded-xl p-1`}>{profile?.name}</p>
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center my-0.5 text-white/20">Email</h1>
-                    </div>
-                    <p className="mt-2 flex justify-center"> {profile?.email}</p>
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center my-0.5 text-white/20">Phone</h1>
-                    </div>
-                    <p className="mt-2 flex justify-center"> {profile?.phone}</p>
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center my-0.5 text-white/20">Institution</h1>
-                    </div>
-                    <p className="mt-2 flex justify-center"> {profile?.institution}</p>
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center my-0.5 text-white/20">Department</h1>
-                    </div>
-                    <p className="mt-2 flex justify-center"> {profile?.dept}</p>
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center my-0.5 text-white/20">Batch</h1>
-                    </div>
-                    <p className="mt-2 flex justify-center"> {profile?.batch}</p>
-                    <div className="divider"> 
-                        <h1 className="text-xs flex justify-center my-0.5 text-white/20">Contribution Points</h1>
-                    </div>
-                    <p className="mt-2 flex justify-center"> {profile?.contribution_points}</p>
-                    
                 </div>
-            </div>
             )
             }
-            
+            </div>
         </div>
+        
     );
 }
