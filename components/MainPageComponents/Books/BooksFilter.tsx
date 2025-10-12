@@ -20,7 +20,7 @@ export default function BooksFilter({ filterState, setFilterState }: BooksFilter
         const fetchCourses = async () => {
         try {
 
-            const res = await fetch('/api/getCourses', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

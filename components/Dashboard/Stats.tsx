@@ -15,14 +15,14 @@ export default function Stats(){
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
         const user = await userFetch.json();
-        const response = await fetch('/api/update/user/name', {
+        const response = await fetch('https://server-univ-vault.onrender.com/update/user/name', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,14 +43,14 @@ export default function Stats(){
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
         const user = await userFetch.json();
-        const response = await fetch('/api/update/user/email', {
+        const response = await fetch('https://server-univ-vault.onrender.com/update/user/email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,14 +71,14 @@ export default function Stats(){
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
         const user = await userFetch.json();
-        const response = await fetch('/api/update/user/phone', {
+        const response = await fetch('https://server-univ-vault.onrender.com/update/user/phone', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -99,14 +99,14 @@ export default function Stats(){
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
         const user = await userFetch.json();
-        const response = await fetch('/api/update/user/batch', {
+        const response = await fetch('https://server-univ-vault.onrender.com/update/user/batch', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -127,14 +127,14 @@ export default function Stats(){
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
         const user = await userFetch.json();
-        const response = await fetch('/api/update/user/dept', {
+        const response = await fetch('https://server-univ-vault.onrender.com/update/user/dept', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -155,14 +155,14 @@ export default function Stats(){
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
             },
         });
         const user = await userFetch.json();
-        const response = await fetch('/api/update/user/institution', {
+        const response = await fetch('https://server-univ-vault.onrender.com/update/user/institution', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

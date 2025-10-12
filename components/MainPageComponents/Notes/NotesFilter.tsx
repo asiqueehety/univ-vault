@@ -22,7 +22,7 @@ export default function NotesFilter({ filterState, setFilterState }: NotesFilter
         const fetchCourses = async () => {
         try {
 
-            const res = await fetch('/api/getCourses', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export default function NotesFilter({ filterState, setFilterState }: NotesFilter
     useEffect(() => {
         const fetchBatches = async () => {
         try {
-            const res = await fetch('/api/getBatches', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getBatches', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

@@ -52,7 +52,7 @@ export default function Upcoming(){
                 return;
             }
             // Get user securely from Supabase
-            const res1 = await fetch('/api/getCurrentUser',
+            const res1 = await fetch('https://server-univ-vault.onrender.com/getCurrentUser',
             {
                 method: 'GET',
                 headers: {
@@ -69,7 +69,7 @@ export default function Upcoming(){
             const dept = user.dept;
             const batch = user.batch;
 
-            const res = await fetch('/api/getUpcomingMaterials', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getUpcomingMaterials', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

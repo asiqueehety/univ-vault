@@ -21,7 +21,7 @@ export default function UploadSchedule(){
     useEffect(() => {
         const fetchCourses = async (department : string) => {
         try {
-            const res = await fetch('/api/getCourses', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export default function UploadSchedule(){
 
     const fetchMaterials = async (course_id:number) => {
         try {
-            const res = await fetch('/api/getMaterials', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getMaterials', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export default function UploadSchedule(){
             return;
         }
         // Get user securely from Supabase
-        const res = await fetch('/api/getCurrentUser',
+        const res = await fetch('https://server-univ-vault.onrender.com/getCurrentUser',
         {
             method: 'GET',
             headers: {
@@ -98,7 +98,7 @@ export default function UploadSchedule(){
         }
 
         try {
-            const res = await fetch('/api/upload/schedule', {
+            const res = await fetch('https://server-univ-vault.onrender.com/upload/schedule', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

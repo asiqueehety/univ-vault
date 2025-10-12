@@ -26,14 +26,14 @@ export default function Profile(){
                     alert("User not logged in or token missing.");
                     return;
                 }
-                const userFetch =await fetch('/api/getCurrentUser',{
+                const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
                     method: "GET",
                     headers: {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
                 const user = await userFetch.json();
-                const response = await fetch('/api/user/profile', {
+                const response = await fetch('https://server-univ-vault.onrender.com/user/profile', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

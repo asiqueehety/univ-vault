@@ -15,7 +15,7 @@ export default function TopContributors(){
 
     useEffect(() => {
         async function fetchContributors() {
-            const response = await fetch('/api/getContributors');
+            const response = await fetch('https://server-univ-vault.onrender.com/getContributors');
             const data = await response.json();
             setContributors(data.contributors);
         }
