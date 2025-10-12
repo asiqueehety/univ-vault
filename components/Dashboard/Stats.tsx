@@ -12,7 +12,7 @@ export default function Stats(){
     async function changeName(){
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
@@ -40,7 +40,7 @@ export default function Stats(){
     async function changeEmail(){
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
@@ -68,7 +68,7 @@ export default function Stats(){
     async function changePhone(){
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
@@ -96,7 +96,7 @@ export default function Stats(){
     async function changeBatch(){
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
@@ -124,7 +124,7 @@ export default function Stats(){
     async function changeDept(){
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
@@ -152,7 +152,7 @@ export default function Stats(){
     async function changeInstitution(){
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
@@ -186,7 +186,7 @@ export default function Stats(){
             <div className="flex flex-row flex-wrap *:m-1">
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_1')?.showModal()}>Username</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_1') as HTMLDialogElement)?.showModal()}>Username</button>
                     <dialog id="my_modal_1" className="modal">
                         <div className="modal-box">
                             <form>
@@ -204,7 +204,7 @@ export default function Stats(){
                     </dialog>
                 </div>
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_2')?.showModal()}>Email</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_2') as HTMLDialogElement)?.showModal()}>Email</button>
                     <dialog id="my_modal_2" className="modal">
                         <div className="modal-box">
                             <form>
@@ -222,7 +222,7 @@ export default function Stats(){
                     </dialog>
                 </div>
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_3')?.showModal()}>Phone</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_3') as HTMLDialogElement)?.showModal()}>Phone</button>
                     <dialog id="my_modal_3" className="modal">
                         <div className="modal-box">
                             <form>
@@ -240,7 +240,7 @@ export default function Stats(){
                     </dialog>
                 </div>
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_4')?.showModal()}>Institution</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_4') as HTMLDialogElement)?.showModal()}>Institution</button>
                     <dialog id="my_modal_4" className="modal">
                         <div className="modal-box">
                             <form>
@@ -258,7 +258,7 @@ export default function Stats(){
                     </dialog>
                 </div>
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_5')?.showModal()}>Department</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_5') as HTMLDialogElement)?.showModal()}>Department</button>
                     <dialog id="my_modal_5" className="modal">
                         <div className="modal-box">
                             <form>
@@ -276,7 +276,7 @@ export default function Stats(){
                     </dialog>
                 </div>
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_6')?.showModal()}>Batch</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_6') as HTMLDialogElement)?.showModal()}>Batch</button>
                     <dialog id="my_modal_6" className="modal">
                         <div className="modal-box">
                             <form>
@@ -294,7 +294,7 @@ export default function Stats(){
                     </dialog>
                 </div>
                 <div>
-                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>document.getElementById('my_modal_7')?.showModal()}>Password</button>
+                    <button className="btn p-1 text-sm bg-black/20 font-light" onClick={()=>(document.getElementById('my_modal_7') as HTMLDialogElement)?.showModal()}>Password</button>
                     <dialog id="my_modal_7" className="modal">
                         <div className="modal-box">
                             <h3 className="font-bold text-lg">Hello!</h3>

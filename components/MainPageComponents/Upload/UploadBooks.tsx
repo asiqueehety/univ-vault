@@ -101,7 +101,7 @@ export default function UploadBooks(){
         }
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         // Get user securely from Supabase
