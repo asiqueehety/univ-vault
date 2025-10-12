@@ -10,7 +10,7 @@ export default function UploadSlides(){
     const [description, setDescription] = useState("");
     const [file, setFile] = useState<File | null>(null);
     const [fileURL, setFileURL] = useState("");
-    const [depts, setDepts] = useState<Array<{ t_dept_name: string }>>([]);
+    const [depts, setDepts] = useState<Array<string>>([]);
     const [selectedDepartment, setSelectedDepartment] = useState<string>("");
     const [teachers, setTeachers] = useState<Array<{ t_id: number; t_name: string }>>([]);
     const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
@@ -170,8 +170,8 @@ export default function UploadSlides(){
 
                 <fieldset className="fieldset">
                     <legend className="fieldset-legend">Department of the course</legend>
-                    <div className="flex-1">
-                        <select defaultValue="Select a department" className="select"
+                    <div className="flex flex-1">
+                        <select defaultValue="" className="select"
                         onChange={(e) => {
                             const dept = e.target.value;
                             setSelectedDepartment(dept);
@@ -180,11 +180,11 @@ export default function UploadSlides(){
                         }}
 
                         >
-                            <option disabled={true}>Select a department</option>
+                            <option value="" disabled>Select a department</option>
                             {!depts && <span className="loading loading-dots loading-lg"></span>}
-                            {depts.map((dept, index) => (
-                                <option key={index} value={dept.t_dept_name}>
-                                {dept.t_dept_name}
+                            {depts.map((dept , index) => (
+                                <option key={index} value={dept}>
+                                {dept}
                                 </option>
                             ))}
                         </select>

@@ -10,7 +10,7 @@ export default function UploadNotes(){
     const [description, setDescription] = useState("");
     const [file, setFile] = useState<File | null>(null);
     const [fileURL, setFileURL] = useState("");
-    const [depts, setDepts] = useState<Array<{ t_dept_name: string }>>([]);
+    const [depts, setDepts] = useState<Array<string>>([]);
     const [selectedDepartment, setSelectedDepartment] = useState<string>("");
     const [teachers, setTeachers] = useState<Array<{ t_id: number; t_name: string }>>([]);
     const [selectedTeacherId, setSelectedTeacherId] = useState<number | null>(null);
