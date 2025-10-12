@@ -179,8 +179,8 @@ export default function UploadNotes(){
                         >
                             <option disabled={true}>Select a department</option>
                             {depts.map((dept, index) => (
-                                <option key={index} value={dept}>
-                                {dept}
+                                <option key={index} value={dept.t_dept_name}>
+                                {dept.t_dept_name}
                                 </option>
                             ))}
                         </select>
@@ -230,7 +230,7 @@ export default function UploadNotes(){
                 <div>
                     <legend className="fieldset-legend">Test year</legend>
                     <div className="flex flex-row gap-12">
-                        <select className="select select-success" onChange={(e) => setBatch(e.target.value)}>
+                        <select className="select select-success" onChange={(e) => setBatch(Number(e.target.value))}>
                             {Array.from({ length: 2025 - 2001 + 1 }, (_, i) => {
                                 const year = 2001 + i;
                                 return (

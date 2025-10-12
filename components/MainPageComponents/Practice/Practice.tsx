@@ -5,7 +5,7 @@ import PracticeFilter from "./PracticeFilter";
 import PracticeMain from "./PracticeMain";
 
 export interface FilterState {
-  type: 'all' | 'course';
+  type: 'all' | 'course' | 'batch';
   value: string;
 }
 

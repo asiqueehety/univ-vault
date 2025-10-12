@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Upcoming(){
     const today = new Date();
     today.setHours(0,0,0,0); // Set to start of the day
-    const [selectedDate, setSelectedDate] = useState<Date>(today);
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(today);
     const [sched, setSched] = useState
     <{
         sch_id:number,

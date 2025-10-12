@@ -183,8 +183,8 @@ export default function UploadSlides(){
                             <option disabled={true}>Select a department</option>
                             {!depts && <span className="loading loading-dots loading-lg"></span>}
                             {depts.map((dept, index) => (
-                                <option key={index} value={dept}>
-                                {dept}
+                                <option key={index} value={dept.t_dept_name}>
+                                {dept.t_dept_name}
                                 </option>
                             ))}
                         </select>
