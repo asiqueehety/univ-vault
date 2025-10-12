@@ -22,8 +22,8 @@ export async function POST(req: Request) {
 
     const { data, error } = await supabase
     .from('scheduled')
-    .eq('sch_id', dbdata.sch_id)
-    .update({[`sch_materials_id_${dbdata.mcount + 1}`]: dbdata.m_id});
+    .update({[`sch_materials_id_${dbdata.mcount + 1}`]: dbdata.m_id})
+    .eq('sch_id', dbdata.sch_id);
     
     if (error) {
       console.error(error);
