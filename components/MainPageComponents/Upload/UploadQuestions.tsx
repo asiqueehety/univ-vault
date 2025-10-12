@@ -18,7 +18,7 @@ export default function UploadNotes(){
     useEffect(() => {
         const fetchDepts = async () => {
         try {
-            const res = await fetch('/api/getDepts', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getDepts', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export default function UploadNotes(){
 
     const fetchCourses = async (department : string) => {
         try {
-            const res = await fetch('/api/getCourses', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default function UploadNotes(){
 
     const fetchTeachers = async (department : string) => {
         try {
-            const res = await fetch('/api/getTeachers', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getTeachers', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -106,7 +106,7 @@ export default function UploadNotes(){
             return;
         }
         // Get user securely from Supabase
-        const res = await fetch('/api/getCurrentUser',
+        const res = await fetch('https://server-univ-vault.onrender.com/getCurrentUser',
         {
             method: 'GET',
             headers: {
@@ -138,7 +138,7 @@ export default function UploadNotes(){
         }
 
         try {
-            const res = await fetch('/api/upload/question', {
+            const res = await fetch('https://server-univ-vault.onrender.com/upload/question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

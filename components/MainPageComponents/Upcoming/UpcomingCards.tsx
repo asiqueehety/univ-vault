@@ -69,7 +69,7 @@ export default function UpcomingCards({event}:schedProps){
     }
     const fetchMaterials = async (course_id:number) => {
         try {
-            const res = await fetch('/api/getMaterials', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getMaterials', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -213,7 +213,7 @@ export default function UpcomingCards({event}:schedProps){
                                         return;
                                     }
                                     // API call to add material to schedule
-                                    fetch('/api/addMaterialToSchedule', {
+                                    fetch('https://server-univ-vault.onrender.com/addMaterialToSchedule', {
                                         method: "POST",
                                         headers: {'Content-Type': 'application/json'},
                                         body: JSON.stringify({ sch_id: event.sch_id, m_id: mid , mcount: event.sch_materials.length}),

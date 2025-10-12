@@ -28,7 +28,7 @@ export default function Contributions() {
             alert("User not logged in or token missing.");
             return;
         }
-        const userFetch =await fetch('/api/getCurrentUser',{
+        const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -36,7 +36,7 @@ export default function Contributions() {
         });
         const user = await userFetch.json();
 
-        const res = await fetch('/api/getUserContributions', {
+        const res = await fetch('https://server-univ-vault.onrender.com/getUserContributions', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ userId: user.user_id }),

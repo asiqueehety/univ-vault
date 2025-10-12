@@ -60,7 +60,7 @@ export default function NotesMain({ filterState }: NotesMainProps) {
         setLoading(true);
         setError(null);
     
-        const res = await fetch('/api/getNotes', {
+        const res = await fetch('https://server-univ-vault.onrender.com/getNotes', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });

@@ -22,7 +22,7 @@ export default function SlidesFilter({ filterState, setFilterState }: SlidesFilt
         const fetchCourses = async () => {
         try {
 
-            const res = await fetch('/api/getCourses', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getCourses', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export default function SlidesFilter({ filterState, setFilterState }: SlidesFilt
     useEffect(() => {
         const fetchTeachers = async () => {
         try {
-            const res = await fetch('/api/getTeachers', {
+            const res = await fetch('https://server-univ-vault.onrender.com/getTeachers', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

@@ -34,7 +34,7 @@ export default function Page() {
     async function handleSubmit(e: React.FormEvent){
         e.preventDefault();
         try{
-            const res = await fetch('/api/auth/join', {
+            const res = await fetch('https://server-univ-vault.onrender.com/auth/join', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -60,7 +60,7 @@ export default function PracticeMain({ filterState }: PracticeMainProps) {
         setLoading(true);
         setError(null);
     
-        const res = await fetch('/api/getPractice', {
+        const res = await fetch('https://server-univ-vault.onrender.com/getPractice', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
         });

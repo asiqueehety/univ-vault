@@ -14,7 +14,7 @@ export default function NavBar() {
     async function logOut() {
         try {
             // Call the logout API to clear the httpOnly cookie on the server
-            const res = await fetch("/api/auth/logout", { method: "POST" });
+            const res = await fetch("https://server-univ-vault.onrender.com/auth/logout", { method: "POST" });
             if (!res.ok) throw new Error("Logout failed");
 
             // Remove token from localStorage (client-side storage)

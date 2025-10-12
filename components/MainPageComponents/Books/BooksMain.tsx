@@ -58,7 +58,7 @@ export default function BooksMain({ filterState }: BooksMainProps) {
         setError(null);
         
         console.log('Fetching books from API...');
-        const res = await fetch('/api/getBooks', {
+        const res = await fetch('https://server-univ-vault.onrender.com/getBooks', {
           method: 'POST', // matches backend
           headers: { 'Content-Type': 'application/json' },
         });

@@ -61,7 +61,7 @@ export default function SlidesMain({ filterState }: SlidesMainProps) {
         setError(null);
         
         console.log('Fetching slides from API...');
-        const res = await fetch('/api/getSlides', {
+        const res = await fetch('https://server-univ-vault.onrender.com/getSlides', {
           method: 'POST', // matches backend
           headers: { 'Content-Type': 'application/json' },
         });
