@@ -25,7 +25,7 @@ export default function Contributions() {
         setLoading(true);
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("User not logged in or token missing.");
+            window.location.href = '/login';
             return;
         }
         const userFetch =await fetch('https://server-univ-vault.onrender.com/getCurrentUser',{
