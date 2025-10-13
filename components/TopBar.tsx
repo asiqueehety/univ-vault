@@ -14,6 +14,7 @@ export default function TopBar() {
         const token = localStorage.getItem('token');
         if (token) {
             fetch('/verifyToken', {
+            method: 'GET',
             headers: { 'Authorization': `Bearer ${token}` },
             }).then(res => res.ok && setIsLoggedIn(true));
         }
