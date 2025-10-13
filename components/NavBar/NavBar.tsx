@@ -7,7 +7,7 @@ const myFont = localFont({
   src: [
     {
       path: '../../public/fonts/menante-font/menante-regular.otf',
-      weight: '400',
+      weight: '200',
       style: 'normal',
     }
   ],

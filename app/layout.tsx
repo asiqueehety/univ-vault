@@ -23,7 +23,7 @@ export default async function RootLayout({
   let isLoggedIn = false;
   if (token) {
     try {
-      jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET!);
+      jwt.verify(token, process.env.JWT_SECRET!);
       isLoggedIn = true;
     } catch (error) {
       console.error("Invalid token:", error);

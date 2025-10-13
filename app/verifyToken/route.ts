@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     }
 
     // Verify JWT on server-side
-    const payload = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET!);
+    const payload = jwt.verify(token, process.env.JWT_SECRET!);
 
     return NextResponse.json({ valid: true, payload });
   } catch (err) {
