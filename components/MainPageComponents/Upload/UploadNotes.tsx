@@ -75,7 +75,7 @@ export default function UploadNotes(){
         formData.append('file', file);
 
         try {
-            const res = await fetch('/api/upload/files/local', {
+            const res = await fetch('/upload/files/local', {
             method: 'POST',
             body: formData,
             });

@@ -1,6 +1,18 @@
 import Menu from "./Menu";
 import Link from "next/link";
 import { Jost } from "next/font/google";
+import localFont from 'next/font/local';
+
+const myFont = localFont({
+  src: [
+    {
+      path: '../../public/fonts/menante-font/menante-regular.otf',
+      weight: '400',
+      style: 'normal',
+    }
+  ],
+  variable: '--font-myfont', // optional, for CSS vars
+});
 
 const jost = Jost({
   subsets:["latin"],
@@ -13,7 +25,7 @@ export default function NavBar() {
     <div className="flex-none">
     </div>
     <div className="flex-1">
-      <Link href="/" className={`btn btn-ghost text-xl ${jost.className}`}>UnivVault</Link>
+      <Link href="/" className={`btn btn-ghost text-xl ${myFont.className}`}>UnivVault</Link>
     </div>
     <div className="flex gap-2">
       <Menu/>
