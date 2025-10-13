@@ -35,7 +35,7 @@ export default function Page() {
                 email: email,
                 pw : pw,
             }),
-            credentials: "include", // ✅ critical
+            credentials: "include",
         });
         const data = await res.json();
         if (res.ok) {

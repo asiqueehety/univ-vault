@@ -1,21 +1,21 @@
+'use client';
+import { useEffect, useState } from 'react';
 import LandingPage from "@/components/LandingPage/LandingPage";
 import OpeningPage from "@/components/MainPageComponents/OpeningPage";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 
-export default async function Home() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
+export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  let isLoggedIn = false;
-  if (token) {
-    try {
-      jwt.verify(token, process.env.JWT_SECRET!);
-      isLoggedIn = true;
-    } catch (error) {
-      console.error("Invalid token:", error);
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch('/verifyToken', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      }).then(res => res.ok && setIsLoggedIn(true));
     }
-  }
+  }, []);
+
+
   return (
     <div>
       {!isLoggedIn ? <LandingPage /> : <OpeningPage />}

@@ -5,6 +5,7 @@ import PageTransitionWrapper from "@/components/PageTransitionWrapper";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import NavBarAfterLogin from "@/components/NavBar/NavBarAfterLogin";
+import TopBar from "@/components/TopBar";
 
 export const metadata: Metadata = {
   title: "UnivVault",
@@ -22,7 +23,7 @@ export default async function RootLayout({
   let isLoggedIn = false;
   if (token) {
     try {
-      jwt.verify(token, process.env.JWT_SECRET!);
+      jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET!);
       isLoggedIn = true;
     } catch (error) {
       console.error("Invalid token:", error);
@@ -31,7 +32,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        {isLoggedIn ? <NavBarAfterLogin /> : <NavBar />}
+        <TopBar/>
         <PageTransitionWrapper>
           {children}
         </PageTransitionWrapper>
