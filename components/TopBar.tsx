@@ -1,9 +1,9 @@
 'use client';
 
 import {useState,useEffect} from "react";
-import jwt from "jsonwebtoken";
 import NavBar from "@/components/NavBar/NavBar";
 import NavBarAfterLogin from "@/components/NavBar/NavBarAfterLogin";
+import {motion} from "framer-motion";
 
 
 
@@ -21,8 +21,25 @@ export default function TopBar() {
     }, []);
 
     return(
-        <>
-        {isLoggedIn? <NavBarAfterLogin /> : <NavBar />}
-        </>
+        <div>
+        {!isLoggedIn && 
+        <motion.div
+        initial={{ y: -250}}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        >
+            <NavBar />
+        </motion.div>
+        }
+        {isLoggedIn &&
+        <motion.div
+        initial={{ y: -250 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        >
+            <NavBarAfterLogin />
+        </motion.div>
+        }
+        </div>
     );
 }
