@@ -6,8 +6,8 @@ import localFont from 'next/font/local';
 const myFont = localFont({
   src: [
     {
-      path: '../../public/fonts/menante-font/menante-regular.otf',
-      weight: '200',
+      path: '../../public/fonts/Geonova/geonova-variable.ttf',
+      weight: '400',
       style: 'normal',
     }
   ],
