@@ -75,7 +75,7 @@ export default function UploadSlides(){
         formData.append('file', file);
 
         try {
-            const res = await fetch('https://server-univ-vault.onrender.com/upload/files/local', {
+            const res = await fetch('/upload/files/local', {
             method: 'POST',
             body: formData,
             });
