@@ -61,7 +61,7 @@ export default function UpcomingCards({event}:schedProps){
         now.setDate(now.getDate()+1);
         const eventDate = new Date(event.sch_date);
         const diffTime = eventDate.getTime() - now.getTime();
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))+1;
         if(diffDays > 1) return `${diffDays} days left`;
         else if(diffDays === 1) return "Tomorrow";
         else if(diffDays === 0) return "Today";
