@@ -119,13 +119,13 @@ export default function UploadSchedule(){
     };
         
     return(
-        <div className="min-h-screen p-4 pt-2 bg-gradient-to-b from-black/50 via-black/30 to-black/50 text-white">
-            <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-xl *:w-xl border p-4 mx-auto my-auto">
-                <legend className="fieldset-legend text-3xl">Set Upcoming Schedule</legend>
+        <div className="min-h-screen p-2 sm:p-4 pt-2 bg-gradient-to-b from-black/50 via-black/30 to-black/50 text-white">
+            <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-full max-w-xl *:w-full border p-3 sm:p-4 mx-auto my-auto">
+                <legend className="fieldset-legend text-xl sm:text-2xl lg:text-3xl">Set Upcoming Schedule</legend>
                 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Type</legend>
-                    <select defaultValue="Select a type" className="select"
+                    <legend className="fieldset-legend text-sm sm:text-base">Type</legend>
+                    <select defaultValue="Select a type" className="select text-sm sm:text-base"
                     onChange=
                     {
                         (e) =>
@@ -144,11 +144,11 @@ export default function UploadSchedule(){
                 </fieldset>
 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Course</legend>
-                    <div className="flex flex-1">
+                    <legend className="fieldset-legend text-sm sm:text-base">Course</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
                         <select
                             defaultValue=""
-                            className="select w-full"
+                            className="select w-full text-sm sm:text-base"
                             onChange={
                                 (e) => 
                                 {
@@ -165,11 +165,11 @@ export default function UploadSchedule(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-4">Required</span>
+                        <span className="label text-red-500 ml-0 sm:ml-4 text-xs sm:text-sm">Required</span>
                     </div> 
                 </fieldset>
 
-                <div className="p-4 bg-neutral-950/30 rounded-lg shadow-lg">
+                <div className="p-2 sm:p-4 bg-neutral-950/30 rounded-lg shadow-lg w-full overflow-x-auto">
                     <DayPicker
                         mode="single"
                         selected={date}
@@ -182,7 +182,7 @@ export default function UploadSchedule(){
                     />
                 </div>
 
-                <select defaultValue="Pick a material : 1" className="select select-primary"
+                <select defaultValue="Pick a material : 1" className="select select-primary text-sm sm:text-base"
                 onChange=
                 {(e)=>
                     {
@@ -203,7 +203,7 @@ export default function UploadSchedule(){
                         ))
                     }
                 </select>
-                <select defaultValue="Pick a material : 2" className="select select-primary"
+                <select defaultValue="Pick a material : 2" className="select select-primary text-sm sm:text-base"
                 onChange=
                 {(e)=>
                     {
@@ -224,7 +224,7 @@ export default function UploadSchedule(){
                         ))
                     }
                 </select>
-                <select defaultValue="Pick a material : 3" className="select select-primary"
+                <select defaultValue="Pick a material : 3" className="select select-primary text-sm sm:text-base"
                 onChange=
                 {(e)=>
                     {
@@ -245,7 +245,7 @@ export default function UploadSchedule(){
                         ))
                     }
                 </select>
-                <select defaultValue="Pick a material : 4" className="select select-primary"
+                <select defaultValue="Pick a material : 4" className="select select-primary text-sm sm:text-base"
                 onChange=
                 {(e)=>
                     {
@@ -266,7 +266,7 @@ export default function UploadSchedule(){
                         ))
                     }
                 </select>
-                <select defaultValue="Pick a material : 5" className="select select-primary"
+                <select defaultValue="Pick a material : 5" className="select select-primary text-sm sm:text-base"
                 onChange=
                 {(e)=>
                     {
@@ -288,38 +288,38 @@ export default function UploadSchedule(){
                     }
                 </select>
                 <br/>
-                <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>    
+                <div className="text-sm sm:text-base">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-info-icon lucide-info inline-block"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>    
                 </div>
                 
                 <div tabIndex={0} className="collapse bg-base-100 text-white/50 border-none border p-2">
-                    <div className="collapse-title font-semibold p-0">What are these {'materials'}?</div>
-                    <div className="collapse-content text-sm text-white/40">
+                    <div className="collapse-title font-semibold p-0 text-sm sm:text-base">What are these materials?</div>
+                    <div className="collapse-content text-xs sm:text-sm text-white/40">
                         If you{`'`}re scheduling an assignment that is due in a specific date, a class test that{`'`}s going to be taken, or a semester exam, you might want to attach relevant study materials like notes, slides, or books. This helps students prepare better. You can select up to 5 materials from the ones you{`'`}ve previously uploaded.
                         If you don{`'`}t want to attach any materials, just leave the selections as they are.
                         If you haven{`'`}t uploaded any materials yet, you must upload them first.
                     </div>
                 </div>
                 <div tabIndex={0} className="collapse bg-base-100 text-white/50 border-none border p-2">
-                    <div className="collapse-title font-semibold p-0">How do I upload these {'materials'}?</div>
-                    <div className="collapse-content text-sm text-white/40">
+                    <div className="collapse-title font-semibold p-0 text-sm sm:text-base">How do I upload these materials?</div>
+                    <div className="collapse-content text-xs sm:text-sm text-white/40">
                         You can upload materials by clicking the floating action button (FAB) on the main page. It{`'`}s the big circular button with a plus sign (+) located at the bottom right corner of the screen. When you click it, a menu will pop up with different options for uploading various types of materials like notes, slides, books, and practice questions. Just select the type of material you want to upload and follow the prompts to complete the upload process.
                     </div>
                 </div>
 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Add a short note</legend>
-                    <textarea className="textarea h-24 w-full" placeholder='e.g: "Excludes pages 28-34 of slides 1 & 2" '
-                    onChange={(e)=>{setShortnote(e.target.value)}}
+                    <legend className="fieldset-legend text-sm sm:text-base">Add a short note</legend>
+                    <textarea className="textarea h-20 sm:h-24 w-full text-sm sm:text-base" placeholder='e.g: "Excludes pages 28-34 of slides 1 & 2" '
+                    onChange={(e)=>{setShortnote(e.target.value);}}
                     >
 
                     </textarea>
-                    <div className="label">Optional</div>
+                    <div className="label text-xs sm:text-sm">Optional</div>
                 </fieldset>
                 
-                <div className="flex justify-between mt-8">
-                    <Link href="/" className="btn btn-dash btn-warning mx-auto">Cancel</Link>
-                    <button onClick={handleSubmit} className="btn btn-soft btn-accent mx-auto">Upload</button>
+                <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8">
+                    <Link href="/" className="btn btn-sm sm:btn-md btn-dash btn-warning mx-auto w-full sm:w-auto">Cancel</Link>
+                    <button onClick={handleSubmit} className="btn btn-sm sm:btn-md btn-soft btn-accent mx-auto w-full sm:w-auto">Upload</button>
                 </div>
             </fieldset>
         </div>

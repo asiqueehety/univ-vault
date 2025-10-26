@@ -159,16 +159,16 @@ export default function UploadNotes(){
     };
         
     return(
-        <div>
-            <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-xl *:w-xl border p-4 mx-auto my-auto">
-                <legend className="fieldset-legend text-3xl">Contribute a Question to practice</legend>
-                <label className="label">Title</label>
-                <input type="text" className="input" placeholder={`eg: Lecture notes on 'C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
+        <div className="p-2 sm:p-4">
+            <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-full max-w-xl *:w-full border p-3 sm:p-4 mx-auto my-auto">
+                <legend className="fieldset-legend text-xl sm:text-2xl lg:text-3xl">Contribute a Question to practice</legend>
+                <label className="label text-sm sm:text-base">Title</label>
+                <input type="text" className="input text-sm sm:text-base" placeholder={`eg: Lecture notes on 'C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Department of the course</legend>
+                    <legend className="fieldset-legend text-sm sm:text-base">Department of the course</legend>
                     <div className="flex-1">
-                        <select defaultValue="Select a department" className="select"
+                        <select defaultValue="Select a department" className="select text-sm sm:text-base"
                         onChange={(e) => {
                             const dept = e.target.value;
                             setSelectedDepartment(dept);
@@ -184,12 +184,12 @@ export default function UploadNotes(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-5">Required</span>
+                        <span className="label text-red-500 ml-2 sm:ml-5 text-xs sm:text-sm">Required</span>
                     </div>
                 </fieldset>
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Source</legend>
-                    <div className="flex flex-1">
+                    <legend className="fieldset-legend text-sm sm:text-base">Source</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
                         <select defaultValue="Questions from:"
                         onChange={(e)=>
                         {
@@ -197,22 +197,22 @@ export default function UploadNotes(){
                             if(e.target.value=="Semester final") {setDescription("term");}
                             if(e.target.value=="Books / others ...") {setDescription("others");}
                             
-                        }} className="select select-neutral">
+                        }} className="select select-neutral text-sm sm:text-base">
                             <option disabled={true}>Questions from:</option>
                             <option>Class test</option>
                             <option>Semester final</option>
                             <option>Books / others ...</option>
                         </select>
-                        <div className="label text-red-600 ml-5">Required</div>
+                        <div className="label text-red-600 ml-0 sm:ml-5 text-xs sm:text-sm">Required</div>
                     </div>
                 </fieldset>
 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Course</legend>
-                    <div className="flex flex-1">
+                    <legend className="fieldset-legend text-sm sm:text-base">Course</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
                         <select
                             defaultValue=""
-                            className="select w-full"
+                            className="select w-full text-sm sm:text-base"
                             onChange={(e) => setSelectedCourseId(Number(e.target.value))}
                             >
                             <option value="" disabled>Select a course</option>
@@ -222,15 +222,15 @@ export default function UploadNotes(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-4">Required</span>
+                        <span className="label text-red-500 ml-0 sm:ml-4 text-xs sm:text-sm">Required</span>
                     </div> 
                 </fieldset>
                 
                 {description && description!="others" &&
                 <div>
-                    <legend className="fieldset-legend">Test year</legend>
-                    <div className="flex flex-row gap-12">
-                        <select className="select select-success" onChange={(e) => setBatch(Number(e.target.value))}>
+                    <legend className="fieldset-legend text-sm sm:text-base">Test year</legend>
+                    <div className="flex flex-row gap-4 sm:gap-12">
+                        <select className="select select-success text-sm sm:text-base w-full sm:w-auto" onChange={(e) => setBatch(Number(e.target.value))}>
                             {Array.from({ length: 2025 - 2001 + 1 }, (_, i) => {
                                 const year = 2001 + i;
                                 return (
@@ -245,11 +245,11 @@ export default function UploadNotes(){
                 }
                 {description=="ct" &&
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Course teacher</legend>
-                    <div className="flex flex-1">
+                    <legend className="fieldset-legend text-sm sm:text-base">Course teacher</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
                         <select
                             defaultValue=""
-                            className="select w-full"
+                            className="select w-full text-sm sm:text-base"
                             onChange={(e) => setSelectedTeacherId(Number(e.target.value))}
                             >
                             <option value="" disabled>Select the course teacher</option>
@@ -259,16 +259,16 @@ export default function UploadNotes(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-4">Required</span>
+                        <span className="label text-red-500 ml-0 sm:ml-4 text-xs sm:text-sm">Required</span>
                     </div> 
                 </fieldset>}
                 
                 
 
-                <input type="file" onChange={uploadedFile} className="file-input file-input-sm mt-4" />
-                <div className="flex justify-between mt-8">
-                    <Link href="/" className="btn btn-dash btn-warning mx-auto">Cancel</Link>
-                    <button onClick={handleSubmit} className="btn btn-soft btn-accent mx-auto">Upload</button>
+                <input type="file" onChange={uploadedFile} className="file-input file-input-xs sm:file-input-sm mt-4 w-full" />
+                <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8">
+                    <Link href="/" className="btn btn-sm sm:btn-md btn-dash btn-warning mx-auto w-full sm:w-auto">Cancel</Link>
+                    <button onClick={handleSubmit} className="btn btn-sm sm:btn-md btn-soft btn-accent mx-auto w-full sm:w-auto">Upload</button>
                 </div>
             </fieldset>
         </div>

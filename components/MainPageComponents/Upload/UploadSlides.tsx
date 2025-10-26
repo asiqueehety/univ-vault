@@ -162,16 +162,16 @@ export default function UploadSlides(){
     }
         
     return(
-        <div>
-            <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-xl *:w-xl border p-4 mx-auto my-auto">
-                <legend className="fieldset-legend text-3xl">Contribute a Slide</legend>
-                <label className="label">Title</label>
-                <input type="text" className="input" placeholder={`eg: C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
+        <div className="p-2 sm:p-4">
+            <fieldset className="fieldset bg-black/20 border-base-300 rounded-box w-full max-w-xl *:w-full border p-3 sm:p-4 mx-auto my-auto">
+                <legend className="fieldset-legend text-xl sm:text-2xl lg:text-3xl">Contribute a Slide</legend>
+                <label className="label text-sm sm:text-base">Title</label>
+                <input type="text" className="input text-sm sm:text-base" placeholder={`eg: C programming character arrays & strings'`} value={title} onChange={(e)=>{setTitle(e.target.value);}} />
 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Department of the course</legend>
-                    <div className="flex flex-1">
-                        <select defaultValue="" className="select"
+                    <legend className="fieldset-legend text-sm sm:text-base">Department of the course</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
+                        <select defaultValue="" className="select text-sm sm:text-base"
                         onChange={(e) => {
                             const dept = e.target.value;
                             setSelectedDepartment(dept);
@@ -188,16 +188,16 @@ export default function UploadSlides(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-5">Required</span>
+                        <span className="label text-red-500 ml-0 sm:ml-5 text-xs sm:text-sm">Required</span>
                     </div>
                 </fieldset>
 
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Course</legend>
-                    <div className="flex flex-1">
+                    <legend className="fieldset-legend text-sm sm:text-base">Course</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
                         <select
                             defaultValue=""
-                            className="select w-full"
+                            className="select w-full text-sm sm:text-base"
                             onChange={(e) => setSelectedCourseId(Number(e.target.value))}
                             >
                             <option value="" disabled>Select a course</option>
@@ -209,15 +209,15 @@ export default function UploadSlides(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-4">Required</span>
+                        <span className="label text-red-500 ml-0 sm:ml-4 text-xs sm:text-sm">Required</span>
                     </div> 
                 </fieldset>
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Course teacher</legend>
-                    <div className="flex flex-1">
+                    <legend className="fieldset-legend text-sm sm:text-base">Course teacher</legend>
+                    <div className="flex flex-col sm:flex-row flex-1 gap-2 sm:gap-0">
                         <select
                             defaultValue=""
-                            className="select w-full"
+                            className="select w-full text-sm sm:text-base"
                             onChange={(e) => setSelectedTeacherId(Number(e.target.value))}
                             >
                             <option value="" disabled>Select the course teacher</option>
@@ -228,20 +228,20 @@ export default function UploadSlides(){
                                 </option>
                             ))}
                         </select>
-                        <span className="label text-red-500 ml-4">Required</span>
+                        <span className="label text-red-500 ml-0 sm:ml-4 text-xs sm:text-sm">Required</span>
                     </div> 
                 </fieldset>
                 <fieldset className="fieldset">
-                    <legend className="fieldset-legend">Description</legend>
-                    <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-30 w-full" placeholder="Add a little description about the slide you're providing. You may add details about the content or context of the slide, who the teacher was for this particular course, which particular topics are present or absent in this slide."></textarea>
-                    <div className="label text-red-600">Required</div>
+                    <legend className="fieldset-legend text-sm sm:text-base">Description</legend>
+                    <textarea onChange={(e)=>{setDescription(e.target.value);}} value={description} className="textarea h-24 sm:h-30 w-full text-sm sm:text-base" placeholder="Add a little description about the slide you're providing. You may add details about the content or context of the slide, who the teacher was for this particular course, which particular topics are present or absent in this slide."></textarea>
+                    <div className="label text-red-600 text-xs sm:text-sm">Required</div>
                 </fieldset>
                 
 
-                <input type="file" onChange={uploadedFile} className="file-input file-input-sm mt-4" />
-                <div className="flex justify-between mt-8">
-                    <Link href="/" className="btn btn-dash btn-warning mx-auto">Cancel</Link>
-                    <button onClick={handleSubmit} className={` ${!allOk ? 'opacity-50 cursor-not-allowed':''} btn btn-soft btn-accent mx-auto`} >Upload</button>
+                <input type="file" onChange={uploadedFile} className="file-input file-input-xs sm:file-input-sm mt-4 w-full" />
+                <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 mt-6 sm:mt-8">
+                    <Link href="/" className="btn btn-sm sm:btn-md btn-dash btn-warning mx-auto w-full sm:w-auto">Cancel</Link>
+                    <button onClick={handleSubmit} className={` ${!allOk ? 'opacity-50 cursor-not-allowed':''} btn btn-sm sm:btn-md btn-soft btn-accent mx-auto w-full sm:w-auto`} >Upload</button>
                 </div>
             </fieldset>
         </div>
