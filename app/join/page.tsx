@@ -127,7 +127,7 @@ export default function Page() {
 
         </form>
         
-        <SignUpWithOthers check = {!!(university && batch && dept)}/>
+        {/* <SignUpWithOthers check = {!!(university && batch && dept)}/> */}
       </div>
     </PageTransitionWrapper>
     
