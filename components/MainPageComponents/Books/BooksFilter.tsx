@@ -48,8 +48,8 @@ export default function BooksFilter({ filterState, setFilterState }: BooksFilter
 
 
     return(
-        <div className={`bg-neutral-900 p-1 rounded-3xl`}>
-            <div className="filter">
+        <div className={`bg-neutral-900 p-2 sm:p-1 rounded-3xl`}>
+            <div className="filter flex flex-wrap gap-1">
                 <input className="btn btn-xs filter-reset bg-amber-800 py-0 h-fit w-fit my-auto" type="radio" name="metaframeworks" aria-label="All"
                 checked={filterState.type === 'all'}
                 onChange={()=>{setFilterState({ type: 'all', value: '' });}}/>
@@ -60,9 +60,9 @@ export default function BooksFilter({ filterState, setFilterState }: BooksFilter
             </div>
             
             {coursesSelected &&
-            <form className="mt-0 overflow-y-auto h-70 md:h-90 lg:h-150 p-0">
-                <div className='flex justify-right'>
-                    <input type="text" placeholder="Search" className="input input-bordered w-24 h-8 md:w-auto m-2 mb-0" 
+            <form className="mt-0 overflow-y-auto h-60 sm:h-70 md:h-90 lg:h-150 p-0">
+                <div className='flex flex-wrap sm:flex-nowrap justify-right'>
+                    <input type="text" placeholder="Search" className="input input-bordered w-full sm:w-24 h-8 md:w-auto m-2 mb-0" 
                     value={search}
                     onChange={(e)=>{setSearch(e.target.value)}}/>
                     <p className="my-auto text-xs bg-black/0 border-none w-fit p-1 rounded-xl">{filteredCourses.length} courses</p>

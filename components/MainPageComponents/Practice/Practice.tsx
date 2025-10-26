@@ -16,7 +16,7 @@ export default function Practice(){
     });
 
     return(
-        <div className={`grid grid-cols-[4fr_13fr]`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-[4fr_13fr]`}>
             {/*Practice filter*/}
             <PracticeFilter filterState={filterState} setFilterState={setFilterState} />
             <PracticeMain filterState={filterState} />

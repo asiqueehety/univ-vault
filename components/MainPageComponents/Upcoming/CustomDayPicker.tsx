@@ -17,13 +17,13 @@ export default function CustomDayPicker({selectedDate, setSelectedDate}: {select
   }
 
   return (
-    <div className="p-4 bg-black/10 rounded-lg shadow-lg h-fit w-fit flex flex-col justify-center">
+    <div className="p-2 sm:p-4 bg-black/10 rounded-lg shadow-lg h-fit w-full sm:w-fit flex flex-col justify-center">
       <DayPicker
         mode="single"
         selected={selectedDate}
         onSelect={setSelectedDate}
       />
-      <h1 className="card card-lg my-2 mx-auto bg-neutral-900 p-2">{selectedDate? isItToday(selectedDate)? "Today":`${formatCustomDate(selectedDate)}` : "Pick a day."}</h1>
+      <h1 className="card card-lg my-2 mx-auto bg-neutral-900 p-2 text-center text-sm sm:text-base">{selectedDate? isItToday(selectedDate)? "Today":`${formatCustomDate(selectedDate)}` : "Pick a day."}</h1>
     </div>
   );
 }

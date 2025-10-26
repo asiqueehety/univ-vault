@@ -16,7 +16,7 @@ export default function Books(){
     });
 
     return(
-        <div className={`grid grid-cols-[4fr_13fr]`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-[4fr_13fr]`}>
             {/*Books filter*/}
             <BooksFilter filterState={filterState} setFilterState={setFilterState} />
             <BooksMain filterState={filterState} />

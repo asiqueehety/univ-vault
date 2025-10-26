@@ -16,7 +16,7 @@ export default function Slides(){
     });
 
     return(
-        <div className={`grid grid-cols-[4fr_13fr]`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-[4fr_13fr]`}>
             {/*Slides filter*/}
             <SlidesFilter filterState={filterState} setFilterState={setFilterState} />
             <SlidesMain filterState={filterState} />

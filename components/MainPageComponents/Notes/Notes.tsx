@@ -16,7 +16,7 @@ export default function Notes(){
     });
 
     return(
-        <div className={`grid grid-cols-[4fr_13fr]`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-[4fr_13fr]`}>
             {/*Notes filter*/}
             <NotesFilter filterState={filterState} setFilterState={setFilterState} />
             <NotesMain filterState={filterState} />

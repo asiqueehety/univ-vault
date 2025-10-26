@@ -84,21 +84,21 @@ export default function UpcomingCards({event}:schedProps){
         }
     };
     return(
-        <div className={`m-4 ${f1.className} flex flex-row justify-center min-h-[45dvh] h-fit`}>
+        <div className={`m-2 md:m-4 ${f1.className} flex flex-col lg:flex-row justify-center min-h-fit lg:min-h-[45dvh] h-fit`}>
             {event.sch_type == 'ct' || event.sch_type== 'assignment'?
-            <div className="card bg-black/20 text-primary-content w-[23vw]">
+            <div className="card bg-black/20 text-primary-content w-full lg:w-[23vw]">
                 <div className="card-body">
                     <h1 className={`badge badge-lg p-8 w-full rounded-2xl text-4xl ${event.sch_type == "ct"? "bg-blue-800":"bg-yellow-900"}`}>
                         {event.sch_type == "ct"? "Test":"Assignment"}
                     </h1>
-                    <div className="flex flex-row gap-2 my-3">
+                    <div className="flex flex-col sm:flex-row gap-2 my-3">
                         <div className="badge badge-neutral">{event.sch_course.c_name} </div>
                         •
                         <div className="badge badge-soft">{event.sch_course.c_dept} </div>
                     </div>
-                    <div className="flex flex-row justify-between">
-                        <div className="badge size-fit bg-red-950 p-3 text-xl">{formatCustomDate(event.sch_date)}</div>
-                        <div className="badge size-fit p-2 m-2">{when()}</div>
+                    <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                        <div className="badge size-fit bg-red-950 p-3 text-base sm:text-xl">{formatCustomDate(event.sch_date)}</div>
+                        <div className="badge size-fit p-2 m-0 sm:m-2">{when()}</div>
                     </div>
 
                     <p className={` ${f2.className} my-3`}>{event.sch_shortnote}</p>
@@ -107,17 +107,17 @@ export default function UpcomingCards({event}:schedProps){
                     </div>
                 </div>
             </div>:
-            <div className="card bg-black/20 text-primary-content w-96">
+            <div className="card bg-black/20 text-primary-content w-full lg:w-96">
                 <div className="card-body">
                     <h1 className="badge badge-lg p-8 w-full rounded-2xl text-4xl bg-black">Finals</h1>
-                    <div className="flex flex-row gap-2 my-3">
+                    <div className="flex flex-col sm:flex-row gap-2 my-3">
                         <div className="badge badge-neutral">{event.sch_course.c_name} </div>
                         •
                         <div className="badge badge-soft">{event.sch_course.c_dept} </div>
                     </div>
-                    <div className="flex flex-row justify-between">
-                        <div className="badge size-fit bg-red-950 p-3 text-xl">{formatCustomDate(event.sch_date)}</div>
-                        <div className="badge size-fit p-2 m-2">{when()}</div>
+                    <div className="flex flex-col sm:flex-row sm:justify-between gap-2">
+                        <div className="badge size-fit bg-red-950 p-3 text-base sm:text-xl">{formatCustomDate(event.sch_date)}</div>
+                        <div className="badge size-fit p-2 m-0 sm:m-2">{when()}</div>
                     </div>
 
                     <p className={` ${f2.className} my-3`}>{event.sch_shortnote}</p>
@@ -125,8 +125,8 @@ export default function UpcomingCards({event}:schedProps){
                 </div>
             </div>
             }
-            <div className="flex flex-col">
-                <div className="flex flex-row">
+            <div className="flex flex-col w-full lg:w-auto">
+                <div className="flex flex-row flex-wrap">
                     <AnimatePresence>
                     {
                     showMaterials &&
@@ -138,7 +138,7 @@ export default function UpcomingCards({event}:schedProps){
                         transition={{ duration: 0.1 }}
                         >
                         {
-                        <div className="card bg-neutral-800/50 h-fit m-2 shadow-sm">
+                        <div className="card bg-neutral-800/50 h-fit m-2 shadow-sm w-full sm:w-auto">
                             <div className="card-body">
                                 <h2 className="card-title mb-2">{material.m_title}</h2>
                                 <div className="badge badge-neutral">{material.m_type} </div>
@@ -166,7 +166,7 @@ export default function UpcomingCards({event}:schedProps){
                 <div>
                     <AnimatePresence>
                         {showMaterials &&
-                        <motion.button className={` btn ${addMaterial? 'btn-warning':'btn-dash'} m-3`}
+                        <motion.button className={` btn ${addMaterial? 'btn-warning':'btn-dash'} m-2 md:m-3 w-full sm:w-auto`}
                         key={"addBtn"}
                         initial={{opacity:0}}
                         animate={{opacity:1}}
@@ -179,8 +179,8 @@ export default function UpcomingCards({event}:schedProps){
                             {addMaterial? "Cancel" : "+ Add"}
                         </motion.button>}
                         {addMaterial &&
-                        <div className="flex flex-row m-3">
-                            <select defaultValue="Pick a material : 1" className="select select-primary"
+                        <div className="flex flex-col sm:flex-row m-2 md:m-3 gap-2">
+                            <select defaultValue="Pick a material : 1" className="select select-primary w-full sm:w-auto"
                             onChange=
                             {(e)=>
                                 {
@@ -201,7 +201,7 @@ export default function UpcomingCards({event}:schedProps){
                                     ))
                                 }
                             </select>
-                            <button className="btn btn-success ml-2"
+                            <button className="btn btn-success ml-0 sm:ml-2 w-full sm:w-auto"
                             onClick={()=>
                                 {
                                     if(event.sch_materials.find(m => m.m_id === mid)){

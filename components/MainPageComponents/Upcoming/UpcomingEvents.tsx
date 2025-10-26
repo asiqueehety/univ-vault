@@ -34,7 +34,7 @@ export default function UpcomingEvents({scheduled}:schedProps){
     scheduled.sort((a, b) => new Date(a.sch_date).getTime() - new Date(b.sch_date).getTime());
     if(scheduled.length === 0){
         return(
-            <div className="flex w-52 flex-col gap-4">
+            <div className="flex w-full sm:w-52 flex-col gap-4">
                 <div className="skeleton h-32 w-full"></div>
                 <div className="skeleton h-4 w-28"></div>
                 <div className="skeleton h-4 w-full"></div>
@@ -44,7 +44,7 @@ export default function UpcomingEvents({scheduled}:schedProps){
     }
 
     return(
-        <div className="flex flex-row flex-wrap overflow-y-auto h-[82vh]">
+        <div className="flex flex-col sm:flex-row flex-wrap overflow-y-auto h-auto sm:h-[82vh] w-full">
             {scheduled.map((event) => (
                 <UpcomingCards key={event.sch_id} event={event} />
             ))}

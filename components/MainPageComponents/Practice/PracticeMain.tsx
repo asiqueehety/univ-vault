@@ -100,7 +100,7 @@ export default function PracticeMain({ filterState }: PracticeMainProps) {
 
   if (loading) {
     return (
-      <div className="p-6 flex items-center justify-center h-[80vh]">
+      <div className="p-2 sm:p-4 lg:p-6 flex items-center justify-center h-[80vh]">
         <div className="text-xl">
           <span className="loading loading-bars loading-lg"></span>
         </div>
@@ -110,34 +110,34 @@ export default function PracticeMain({ filterState }: PracticeMainProps) {
 
   if (error) {
     return (
-      <div className="p-6 flex items-center justify-center h-[80vh]">
-        <div className="text-xl text-red-500">Error: {error}</div>
+      <div className="p-2 sm:p-4 lg:p-6 flex items-center justify-center h-[80vh]">
+        <div className="text-sm sm:text-xl text-red-500">Error: {error}</div>
       </div>
     );
   }
 
   if (practiceList.length === 0) {
     return (
-      <div className="p-6 flex items-center justify-center h-[80vh]">
-        <div className="text-xl">No practice found</div>
+      <div className="p-2 sm:p-4 lg:p-6 flex items-center justify-center h-[80vh]">
+        <div className="text-sm sm:text-xl">No practice found</div>
       </div>
     );
   }
 
   if (filteredPractice.length === 0 && filterState.type !== 'all') {
     return (
-      <div className="p-6 flex items-center justify-center h-[80vh]">
-        <div className="text-xl text-white/20">No practice found</div>
+      <div className="p-2 sm:p-4 lg:p-6 flex items-center justify-center h-[80vh]">
+        <div className="text-sm sm:text-xl text-white/20">No practice found</div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 overflow-y-auto h-[80vh]">
+    <div className="p-2 sm:p-4 lg:p-6 overflow-y-auto h-auto sm:h-[80vh]">
       {Object.entries(groupedPractice).map(([courseName, practice]) => (
         <div key={courseName} className="mb-6">
-          <h2 className="text-3xl my-3 bg-black/20 rounded-xl p-3">{courseName}</h2>
-          <div className="flex flex-wrap gap-4">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl my-3 bg-black/20 rounded-xl p-2 sm:p-3">{courseName}</h2>
+          <div className="flex flex-wrap gap-2 sm:gap-4 justify-center sm:justify-start">
             {practice.map((prac) => (
               <PracticeCard key={prac.q_id} prac={prac} />
             ))}
